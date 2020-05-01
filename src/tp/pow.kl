@@ -1,0 +1,20 @@
+PROGRAM mth_pow
+%NOBUSYLAMP
+%NOLOCKGROUP
+%COMMENT = 'absolute value'
+
+VAR
+	  reg_no : INTEGER
+    power : REAL
+    val : REAL
+
+%include registers.klh
+%include math.klh
+
+BEGIN
+  val = GET_REAL_AR(1)
+  power = GET_REAL_AR(2)
+  reg_no = GET_INT_AR(3)
+
+  PUT_REAL_REG(reg_no, POW(val, power))
+END mth_pow

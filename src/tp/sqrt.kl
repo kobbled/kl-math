@@ -1,0 +1,17 @@
+PROGRAM mth_sqrt
+%NOBUSYLAMP
+%NOLOCKGROUP
+%COMMENT = 'square root'
+
+VAR
+	  reg_no : INTEGER
+    val : REAL
+
+%INCLUDE registers.klh
+
+BEGIN
+  val = GET_REAL_AR(1)
+  reg_no = GET_INT_AR(2)
+
+  PUT_REAL_REG(reg_no, SQRT(val))
+END mth_sqrt
