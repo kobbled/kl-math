@@ -1,0 +1,149 @@
+PROGRAM math
+%NOBUSYLAMP
+%COMMENT = 'math library'
+
+%NOLOCKGROUP
+%NOPAUSE = COMMAND + TPENABLE + ERROR
+
+%include math.private.klt
+%include math.klt
+
+%include math.private.klh
+%include math.klh
+
+%include errors.klh
+%include strings.klh
+
+
+ROUTINE POW
+  BEGIN
+    RETURN(EXP(exponent * LN(value)))
+  END POW
+
+ROUTINE LOG10
+  BEGIN
+    RETURN(LN(num)/M_LN10)
+  END LOG10
+
+ROUTINE LOG2
+  BEGIN
+    RETURN(LN(num)/M_LN2)
+  END LOG2
+
+ROUTINE FLOOR
+  VAR
+    trun_num : INTEGER
+  BEGIN
+    trun_num = TRUNC(num)
+    IF trun_num <= 0 THEN
+      trun_num = trun_num - 1
+    ENDIF
+    RETURN(trun_num)
+  END FLOOR
+
+ROUTINE CEIL
+  VAR
+    trun_num : INTEGER
+  BEGIN
+    trun_num = TRUNC(num)
+    IF trun_num >= 0 THEN
+      trun_num = trun_num + 1
+    ENDIF
+    RETURN(trun_num)
+  END CEIL
+
+ROUTINE DECIMAL
+  VAR
+    s : STRING[16]
+    rNum : REAL
+    i : INTEGER
+    
+  BEGIN
+    IF UNINIT(num) THEN
+            RETURN(0)
+    ENDIF
+    CNV_REAL_STR(num,0, digits, s)
+    s = lstrip(s)
+
+      -- fix -.234 issue
+      IF SUB_STR(s,1,1) = '-' THEN
+        -- see if next char is .
+        IF SUB_STR(s,2,1) = '.' THEN
+          s = '-0.' + SUB_STR(s,3,STR_LEN(s))
+        ENDIF
+      ENDIF
+
+      -- add leading zero
+      IF SUB_STR(s,1,1) = '.' THEN
+        s = '0' + s
+      ENDIF
+      
+      -- return back to real number
+      CNV_STR_REAL(s, rNum)
+      
+      IF UNINIT(rNum) THEN
+        karelError(s + ' is not an number', 2)
+      ENDIF
+      
+      RETURN(rNum) 
+  END DECIMAL
+
+ROUTINE MAX_i
+  VAR
+    max : INTEGER
+    i   : INTEGER
+  BEGIN
+    max = 0
+    FOR i=1 TO ARRAY_LEN(numbers) DO
+      IF numbers[i] > max THEN
+        max = numbers[i]
+      ENDIF
+    ENDFOR
+
+    RETURN(max)
+  END MAX_i
+
+ROUTINE MAX_r
+  VAR
+    max : REAL
+    i   : INTEGER
+  BEGIN
+    max = 0.0
+    FOR i=1 TO ARRAY_LEN(numbers) DO
+      IF numbers[i] > max THEN
+        max = numbers[i]
+      ENDIF
+    ENDFOR
+
+    RETURN(max)
+  END MAX_r
+
+-- ROUTINE MAXMIN_
+-- VAR
+--   i   : INTEGER
+-- BEGIN
+--   max = 0.0
+
+--   IF ARRAY_LEN(num_r) <= 1 AND num_r[1] == 0 THEN
+--   ENDIF
+
+-- END MAXMIN_
+
+ROUTINE RAND
+  VAR
+    seed : INTEGER
+  BEGIN
+    seed = (m_seed*M_MULTIPLIER + M_INCREMENT) MOD M_MODULUS
+    RETURN(seed/65535.0)
+  END RAND
+
+ROUTINE SRAND
+  BEGIN
+    m_seed = seed MOD (M_MODULUS-1)
+  END SRAND
+
+
+
+
+BEGIN
+END math

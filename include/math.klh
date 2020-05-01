@@ -1,0 +1,21 @@
+%ifndef math_h
+%define math_h
+
+ROUTINE POW(value, exponent : REAL) : REAL FROM math
+ROUTINE FLOOR(num : REAL) : INTEGER FROM math
+ROUTINE CEIL(num : REAL) : INTEGER FROM math
+ROUTINE DECIMAL(num : REAL; digits : INTEGER) : REAL FROM math
+ROUTINE LOG10(num : REAL) : REAL FROM math
+ROUTINE LOG2(num : REAL) : REAL FROM math
+ROUTINE MAX_i(numbers : ARRAY[*] OF INTEGER) : INTEGER FROM math
+ROUTINE MAX_r(numbers : ARRAY[*] OF REAL) : REAL FROM math
+ROUTINE MIN_i(numbers : ARRAY[*] OF INTEGER) : INTEGER FROM math
+ROUTINE MIN_r(numbers : ARRAY[*] OF REAL) : REAL FROM math
+ROUTINE RAND : REAL FROM math
+ROUTINE SRAND(seed : INTEGER) FROM math
+ROUTINE SUM(numbers : ARRAY[*] OF REAL) : REAL FROM math
+ROUTINE cARR2REAL(numbers : ARRAY[*] OF INTEGER) : ARRAY[*] OF REAL FROM math
+ROUTINE cARR2INT(numbers : ARRAY[*] OF REAL) : ARRAY[*] OF INTEGER FROM math
+
+
+%endif --math_h

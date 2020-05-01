@@ -1,0 +1,13 @@
+%ifndef math_private_t
+%define math_private_t
+
+--seed values
+------------
+%define M_INCREMENT 13849 
+%define M_MODULUS 65536
+%define M_MULTIPLIER 25173
+
+VAR
+  m_seed : INTEGER
+
+%endif --math_private_t

@@ -1,0 +1,6 @@
+%ifndef math_private_h
+%define math_private_h
+
+ROUTINE MAXMIN_(max_min : BOOLEAN ; num_r : ARRAY[*] OF REAL; max_i : INTEGER; max_r : REAL) FROM math
+
+%endif --math_private_h
