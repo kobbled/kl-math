@@ -1,0 +1,55 @@
+PROGRAM test_math
+%NOLOCKGROUP
+
+VAR
+  entry : INTEGER
+  status : INTEGER
+
+%include math.klt
+
+%include math.klh
+%include kunit.klh
+
+ROUTINE t_pow : BOOLEAN
+  BEGIN
+    RETURN(kunit_eq_r(256, pow(2, 8)) AND kunit_eq_r(3, decimal(pow(M_E, ln(3)), 1) ) AND
+          kunit_eq_r(1, pow(1, M_E)) AND kunit_eq_r(70.0, decimal(pow(8.3666, 2), 1)))
+  END t_pow
+
+ROUTINE t_floor : BOOLEAN
+  BEGIN
+    RETURN(kunit_eq_int(3, floor(M_PI)) AND kunit_eq_int(-3, floor(-2.5)))
+  END t_floor
+
+ROUTINE t_ceil : BOOLEAN
+  BEGIN
+    RETURN(kunit_eq_int(4, ceil(M_PI)) AND kunit_eq_int(-2, ceil(-2.5)))
+  END t_ceil
+
+ROUTINE t_round : BOOLEAN
+  BEGIN
+    RETURN(kunit_eq_r(3.142, decimal(M_PI, 3)) AND kunit_eq_r(-6.70, decimal(-6.6982, 2)))
+  END t_round
+
+ROUTINE t_log10 : BOOLEAN
+  BEGIN
+    RETURN(kunit_eq_r(0, log10(1)) AND kunit_eq_r(3, log10(1000)) AND
+           kunit_eq_r(1.69897, log10(50)))
+  END t_log10
+
+ROUTINE t_log2 : BOOLEAN
+  BEGIN
+    RETURN(kunit_eq_r(2, log2(4)) AND kunit_eq_r(6, log2(64)) AND
+           kunit_eq_r(2.321928, log2(5)))
+  END t_log2
+
+BEGIN
+  kunit_test('test_power()', t_pow)
+  kunit_test('test_floor()', t_floor)
+  kunit_test('test_ceiling()', t_ceil)
+  kunit_test('test_rounding()', t_round)
+  kunit_test('test_log10()', t_log10)
+  kunit_test('test_log2()', t_log2)
+
+  kunit_done
+END test_math
