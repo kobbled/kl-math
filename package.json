@@ -21,8 +21,11 @@
   ],
   "depends" : [
     "KUnit",
-    "registers",
     "Strings",
-    "errors"
+    "errors",
+    "registers",
+    "display",
+    "TPElib",
+    "ktransw-macros"
   ]
 }

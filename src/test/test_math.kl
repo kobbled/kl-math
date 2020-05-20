@@ -6,9 +6,12 @@ VAR
   status : INTEGER
 
 %include math.klt
+%include display.c.klt
 
-%include math.klh
+%include strings.klh
+%include display.klh
 %include kunit.klh
+%include math.klh
 
 ROUTINE t_pow : BOOLEAN
   BEGIN
@@ -43,6 +46,143 @@ ROUTINE t_log2 : BOOLEAN
            kunit_eq_r(2.321928, log2(5)))
   END t_log2
 
+ROUTINE t_rand : BOOLEAN
+  VAR
+    s_tme  : STRING[16]
+    tme1, tme2, tme3, tme4 : INTEGER
+    b1, b2, b3, b4 : BOOLEAN
+  BEGIN
+    s_tme = '02-FEB-20 01:00'
+    CNV_STR_TIME(s_tme, tme1)
+    SRAND(tme1)
+    b1 = kunit_eq_r(0.781, RAND)
+
+    s_tme = '02-FEB-20 02:00'
+    CNV_STR_TIME(s_tme, tme2)
+    SRAND(tme2)
+    b2 = kunit_eq_r(0.437, RAND)
+
+    s_tme = '02-FEB-20 03:00'
+    CNV_STR_TIME(s_tme, tme3)
+    SRAND(tme3)
+    b3 = kunit_eq_r(0.093, RAND)
+
+    s_tme = '02-FEB-20 04:00'
+    CNV_STR_TIME(s_tme, tme4)
+    SRAND(tme4)
+    b4 = kunit_eq_r(0.750, RAND)
+
+    RETURN(b1 AND b2 AND b3 AND b4)
+  END t_rand
+
+ROUTINE t_map : BOOLEAN
+  BEGIN
+    RETURN(kunit_eq_r(500, MAP_r(0.5, 0, 1, 0, 1000)) AND &
+           kunit_eq_r(M_PI_2, MAP_r(M_PI, 0, M_PI, 0, M_PI_2)) AND &
+           kunit_eq_r(2.441, MAP_r(1000, 0, pow(2, 11), 0, 5)) AND &
+           kunit_eq_int(50, MAP_i(0.5, 0, 1, 0, 100)) AND &
+           kunit_eq_int(127, MAP_i(512, 0, 1023, 0, 255)) )
+  END t_map
+
+ROUTINE t_rand_int : BOOLEAN
+  VAR
+    s_tme  : STRING[16]
+    tme1, tme2, tme3, tme4 : INTEGER
+    b1, b2, b3, b4 : BOOLEAN
+  BEGIN
+    s_tme = '02-FEB-20 01:00'
+    CNV_STR_TIME(s_tme, tme1)
+    SRAND(tme1)
+    b1 = kunit_eq_int(25601, RANDINT)
+
+    s_tme = '02-FEB-20 02:00'
+    CNV_STR_TIME(s_tme, tme2)
+    SRAND(tme2)
+    b2 = kunit_eq_int(14337, RANDINT)
+
+    s_tme = '02-FEB-20 03:00'
+    CNV_STR_TIME(s_tme, tme3)
+    SRAND(tme3)
+    b3 = kunit_eq_int(23, RANDCOLOR)
+
+    s_tme = '02-FEB-20 04:00'
+    CNV_STR_TIME(s_tme, tme4)
+    SRAND(tme4)
+    b4 = kunit_eq_int(191, RANDCOLOR)
+
+    RETURN(b1 AND b2 AND b3 AND b4)
+
+  END t_rand_int
+
+ROUTINE t_rand_arr : BOOLEAN
+  VAR
+    i    : INTEGER
+    s_tme  : STRING[16]
+    tme : INTEGER
+    arr, sol_arr : ARRAY[10] OF REAL
+    s_arr : ARRAY[10] OF STRING[6]
+  BEGIN
+    s_tme = '02-FEB-20 20:20'
+    CNV_STR_TIME(s_tme, tme)
+    FOR i=1 TO ARRAY_LEN(arr) DO
+      SRAND(tme*i)
+      arr[i] = ABS(RAND)
+    ENDFOR
+
+    s_to_arr('0.08,0.667,0.414,0.454,0.292,0.039,0.829,0.917,0.664,0.204',',', s_arr)
+    sarr_to_rarr(s_arr, sol_arr)
+
+    RETURN(kunit_eq_arr(sol_arr, arr))
+  END t_rand_arr
+
+
+ROUTINE t_sum : BOOLEAN
+  VAR
+    i    : INTEGER
+    s_tme  : STRING[16]
+    tme : INTEGER
+    arr1 : ARRAY[10] OF REAL
+    sum   : REAL
+  BEGIN
+    s_tme = '02-FEB-20 20:20'
+    CNV_STR_TIME(s_tme, tme)
+    FOR i=1 TO ARRAY_LEN(arr1) DO
+      SRAND(tme*i)
+      arr1[i] = ABS(RAND)
+    ENDFOR
+    sum = sum_r(arr1)
+    RETURN(kunit_eq_r(4.564, sum))
+  END t_sum
+
+
+ROUTINE t_count_even : BOOLEAN
+  VAR
+    i    : INTEGER
+    arr1 : ARRAY[10] OF REAL
+    sum   : REAL
+  BEGIN
+    FOR i=1 TO ARRAY_LEN(arr1) DO
+      arr1[i] = i MOD 2
+    ENDFOR
+    sum = sum_r(arr1)
+    RETURN(kunit_eq_r(5, sum))
+  END t_count_even
+
+
+ROUTINE t_average : BOOLEAN
+  VAR
+    i    : INTEGER
+    arr1 : ARRAY[10] OF REAL
+    ave   : REAL
+  BEGIN
+    FOR i=1 TO ARRAY_LEN(arr1) DO
+      arr1[i] = i
+    ENDFOR
+
+    ave = average_r(arr1)
+    RETURN(kunit_eq_r(5.5, ave))
+  END t_average
+
 BEGIN
   kunit_test('test_power()', t_pow)
   kunit_test('test_floor()', t_floor)
@@ -50,6 +190,13 @@ BEGIN
   kunit_test('test_rounding()', t_round)
   kunit_test('test_log10()', t_log10)
   kunit_test('test_log2()', t_log2)
+  kunit_test('test random number', t_rand)
+  kunit_test('test map function', t_map)
+  kunit_test('test random integers', t_rand_int)
+  kunit_test('test random array', t_rand_arr)
+  kunit_test('test sum of rand', t_sum)
+  kunit_test('test count even numbers', t_count_even)
+  kunit_test('test average numbers', t_average)
 
   kunit_done
 END test_math

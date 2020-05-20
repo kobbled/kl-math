@@ -11,11 +11,15 @@ ROUTINE MAX_i(numbers : ARRAY[*] OF INTEGER) : INTEGER FROM math
 ROUTINE MAX_r(numbers : ARRAY[*] OF REAL) : REAL FROM math
 ROUTINE MIN_i(numbers : ARRAY[*] OF INTEGER) : INTEGER FROM math
 ROUTINE MIN_r(numbers : ARRAY[*] OF REAL) : REAL FROM math
-ROUTINE RAND : REAL FROM math
+ROUTINE MAP_r(x, in_min, in_max, out_min, out_max : REAL) : REAL FROM math
+ROUTINE MAP_i(x, in_min, in_max : REAL ; out_min, out_max : INTEGER) : INTEGER FROM math
 ROUTINE SRAND(seed : INTEGER) FROM math
-ROUTINE SUM(numbers : ARRAY[*] OF REAL) : REAL FROM math
-ROUTINE cARR2REAL(numbers : ARRAY[*] OF INTEGER) : ARRAY[*] OF REAL FROM math
-ROUTINE cARR2INT(numbers : ARRAY[*] OF REAL) : ARRAY[*] OF INTEGER FROM math
+ROUTINE RAND : REAL FROM math
+ROUTINE RANDRNG(min : REAL ; max : REAL) : REAL FROM math
+ROUTINE RANDINT : INTEGER FROM math
+ROUTINE RANDCOLOR : INTEGER FROM math
+ROUTINE SUM_r(numbers : ARRAY[*] OF REAL) : REAL FROM math
+ROUTINE AVERAGE_r(numbers : ARRAY[*] OF REAL) : REAL FROM math
 
 
 %endif --math_h

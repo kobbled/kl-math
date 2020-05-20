@@ -9,12 +9,13 @@ VAR
     val : REAL
 
 %include registers.klh
+%include tpe.klh
 %include math.klh
 
 BEGIN
-  val = GET_REAL_AR(1)
-  power = GET_REAL_AR(2)
-  reg_no = GET_INT_AR(3)
+  val = tpe__get_real_arg(1)
+  power = tpe__get_real_arg(2)
+  reg_no = tpe__get_int_arg(3)
 
-  PUT_REAL_REG(reg_no, POW(val, power))
+  registers__set_real(reg_no, POW(val, power))
 END mth_pow

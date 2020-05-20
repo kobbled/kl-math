@@ -118,16 +118,43 @@ ROUTINE MAX_r
     RETURN(max)
   END MAX_r
 
--- ROUTINE MAXMIN_
--- VAR
---   i   : INTEGER
--- BEGIN
---   max = 0.0
+ROUTINE SUM_r
+  VAR
+    i   : INTEGER
+    sum : REAL
+  BEGIN
+    sum = 0
+    FOR i=1 TO ARRAY_LEN(numbers) DO
+      sum = sum + numbers[i]
+    ENDFOR
 
---   IF ARRAY_LEN(num_r) <= 1 AND num_r[1] == 0 THEN
---   ENDIF
+    RETURN(sum)
+  END SUM_r
 
--- END MAXMIN_
+ROUTINE AVERAGE_r
+  VAR
+    i   : INTEGER
+    ave : REAL
+  BEGIN
+    ave = 0
+    FOR i=1 TO ARRAY_LEN(numbers) DO
+      ave = ave + numbers[i]
+    ENDFOR
+
+    ave = ave/ARRAY_LEN(numbers)
+
+    RETURN(ave)
+  END AVERAGE_r
+
+ROUTINE MAP_r
+  BEGIN
+    RETURN((x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min)
+  END MAP_r
+
+ROUTINE MAP_i
+  BEGIN
+    RETURN(TRUNC((x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min))
+  END MAP_i
 
 ROUTINE RAND
   VAR
@@ -136,6 +163,21 @@ ROUTINE RAND
     seed = (m_seed*M_MULTIPLIER + M_INCREMENT) MOD M_MODULUS
     RETURN(seed/65535.0)
   END RAND
+
+ROUTINE RANDRNG
+  BEGIN
+    RETURN(MAP_r(RAND, 0, 1, min, max))
+  END RANDRNG
+
+ROUTINE RANDINT
+  BEGIN
+    RETURN(MAP_i(RAND, 0, 1, 0, MAX_INT))
+  END RANDINT
+
+ROUTINE RANDCOLOR
+  BEGIN
+    RETURN(MAP_i(RAND, 0, 1, 0, MAX_BYTE))
+  END RANDCOLOR
 
 ROUTINE SRAND
   BEGIN

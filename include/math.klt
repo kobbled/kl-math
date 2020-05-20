@@ -33,6 +33,9 @@
 
 CONST
   MAX_RAND = 13849
+  MAX_INT = 32767
+  MAX_BYTE = 255
+  
 
 
 %endif --math_t

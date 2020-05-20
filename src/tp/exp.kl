@@ -7,10 +7,11 @@ VAR
 	  reg_no : INTEGER
     val : REAL
 
-%INCLUDE registers.klh
+%include tpe.klh
+%include registers.klh
 
 BEGIN
-  val = GET_REAL_AR(1)
-  reg_no = GET_INT_AR(2)
-  PUT_REAL_REG(reg_no, EXP(val))
+  val = tpe__get_real_arg(1)
+  reg_no = tpe__get_int_arg(2)
+  registers__set_real(reg_no, EXP(val))
 END mth_exp
