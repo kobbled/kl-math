@@ -7,21 +7,21 @@ TP_GROUPMASK = "*,*,*,*,*"
 TP_COMMENT = "test karel math"
 
 #absolute value test
-Dummy_1 = -3.5
-MTH_ABS(Dummy_1, &Dummy_1)
+dummy_var1 = -3.5
+MTH_ABS(dummy_var1, &dummy_var1)
 
 #exponent test
-Dummy_2 = 1
-MTH_EXP(Dummy_2, &Dummy_2)
+dummy_var2 = 1
+MTH_EXP(dummy_var2, &dummy_var2)
 
 #power test
-Dummy_3 = 2
-Dummy_4 = 8
-MTH_POW(Dummy_3, Dummy_4, &Dummy_3)
+dummy_var3 = 2
+dummy_var4 = 8
+MTH_POW(dummy_var3, dummy_var4, &dummy_var3)
 
 #sqrt test
-Dummy_5 = 64
-MTH_SQRT(Dummy_5, &Dummy_5)
+dummy_var5 = 64
+MTH_SQRT(dummy_var5, &dummy_var5)
 
 
 @end

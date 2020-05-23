@@ -120,7 +120,6 @@ ROUTINE t_rand_arr : BOOLEAN
     s_tme  : STRING[16]
     tme : INTEGER
     arr, sol_arr : ARRAY[10] OF REAL
-    s_arr : ARRAY[10] OF STRING[6]
   BEGIN
     s_tme = '02-FEB-20 20:20'
     CNV_STR_TIME(s_tme, tme)
@@ -129,8 +128,7 @@ ROUTINE t_rand_arr : BOOLEAN
       arr[i] = ABS(RAND)
     ENDFOR
 
-    s_to_arr('0.08,0.667,0.414,0.454,0.292,0.039,0.829,0.917,0.664,0.204',',', s_arr)
-    sarr_to_rarr(s_arr, sol_arr)
+    s_to_rarr('0.08,0.667,0.414,0.454,0.292,0.039,0.829,0.917,0.664,0.204',',', sol_arr)
 
     RETURN(kunit_eq_arr(sol_arr, arr))
   END t_rand_arr
