@@ -15,22 +15,22 @@ PROGRAM math
 %include strings.klh
 
 
-ROUTINE POW
+ROUTINE math__pow
   BEGIN
     RETURN(EXP(exponent * LN(value)))
-  END POW
+  END math__pow
 
-ROUTINE LOG10
+ROUTINE math__log10
   BEGIN
     RETURN(LN(num)/M_LN10)
-  END LOG10
+  END math__log10
 
-ROUTINE LOG2
+ROUTINE math__log2
   BEGIN
     RETURN(LN(num)/M_LN2)
-  END LOG2
+  END math__log2
 
-ROUTINE FLOOR
+ROUTINE math__floor
   VAR
     trun_num : INTEGER
   BEGIN
@@ -39,9 +39,9 @@ ROUTINE FLOOR
       trun_num = trun_num - 1
     ENDIF
     RETURN(trun_num)
-  END FLOOR
+  END math__floor
 
-ROUTINE CEIL
+ROUTINE math__ceil
   VAR
     trun_num : INTEGER
   BEGIN
@@ -50,9 +50,9 @@ ROUTINE CEIL
       trun_num = trun_num + 1
     ENDIF
     RETURN(trun_num)
-  END CEIL
+  END math__ceil
 
-ROUTINE DECIMAL
+ROUTINE math_decimal
   VAR
     s : STRING[16]
     rNum : REAL
@@ -86,14 +86,14 @@ ROUTINE DECIMAL
       ENDIF
       
       RETURN(rNum) 
-  END DECIMAL
+  END math_decimal
 
-ROUTINE MAX_i
+ROUTINE math__max_int
   VAR
     max : INTEGER
     i   : INTEGER
   BEGIN
-    max = 0
+    max = numbers[1]
     FOR i=1 TO ARRAY_LEN(numbers) DO
       IF numbers[i] > max THEN
         max = numbers[i]
@@ -101,14 +101,14 @@ ROUTINE MAX_i
     ENDFOR
 
     RETURN(max)
-  END MAX_i
+  END math__max_int
 
-ROUTINE MAX_r
+ROUTINE math__max_real
   VAR
     max : REAL
     i   : INTEGER
   BEGIN
-    max = 0.0
+    max = numbers[1]
     FOR i=1 TO ARRAY_LEN(numbers) DO
       IF numbers[i] > max THEN
         max = numbers[i]
@@ -116,9 +116,39 @@ ROUTINE MAX_r
     ENDFOR
 
     RETURN(max)
-  END MAX_r
+  END math__max_real
 
-ROUTINE SUM_r
+ROUTINE math__min_int
+  VAR
+    min : INTEGER
+    i   : INTEGER
+  BEGIN
+    min = numbers[1]
+    FOR i=1 TO ARRAY_LEN(numbers) DO
+      IF numbers[i] < min THEN
+        min = numbers[i]
+      ENDIF
+    ENDFOR
+
+    RETURN(min)
+  END math__min_int
+
+ROUTINE math__min_real
+  VAR
+    min : REAL
+    i   : INTEGER
+  BEGIN
+    min = numbers[1]
+    FOR i=1 TO ARRAY_LEN(numbers) DO
+      IF numbers[i] < min THEN
+        min = numbers[i]
+      ENDIF
+    ENDFOR
+
+    RETURN(min)
+  END math__min_real
+
+ROUTINE math__sum_real
   VAR
     i   : INTEGER
     sum : REAL
@@ -129,9 +159,9 @@ ROUTINE SUM_r
     ENDFOR
 
     RETURN(sum)
-  END SUM_r
+  END math__sum_real
 
-ROUTINE AVERAGE_r
+ROUTINE math__average_real
   VAR
     i   : INTEGER
     ave : REAL
@@ -144,48 +174,155 @@ ROUTINE AVERAGE_r
     ave = ave/ARRAY_LEN(numbers)
 
     RETURN(ave)
-  END AVERAGE_r
+  END math__average_real
 
-ROUTINE MAP_r
+ROUTINE math__map_real
   BEGIN
     RETURN((x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min)
-  END MAP_r
+  END math__map_real
 
-ROUTINE MAP_i
+ROUTINE math__map_int
   BEGIN
     RETURN(TRUNC((x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min))
-  END MAP_i
+  END math__map_int
 
-ROUTINE RAND
+
+ROUTINE math__srand
+  BEGIN
+    m_seed = seed MOD (M_MODULUS-1)
+  END math__srand
+
+
+ROUTINE math__rand
   VAR
     seed : INTEGER
   BEGIN
     seed = (m_seed*M_MULTIPLIER + M_INCREMENT) MOD M_MODULUS
-    RETURN(seed/65535.0)
-  END RAND
+    RETURN(ABS(seed/65535.0))
+  END math__rand
 
-ROUTINE RANDRNG
+
+ROUTINE math__rand_range
   BEGIN
-    RETURN(MAP_r(RAND, 0, 1, min, max))
-  END RANDRNG
+    RETURN(math__map_real(math__rand, 0, 1, min, max))
+  END math__rand_range
 
-ROUTINE RANDINT
+
+ROUTINE math__rand_int
   BEGIN
-    RETURN(MAP_i(RAND, 0, 1, 0, MAX_INT))
-  END RANDINT
+    RETURN(math__map_int(math__rand, 0, 1, 0, MAX_INT))
+  END math__rand_int
 
-ROUTINE RANDCOLOR
+
+ROUTINE math__rand_color
   BEGIN
-    RETURN(MAP_i(RAND, 0, 1, 0, MAX_BYTE))
-  END RANDCOLOR
+    RETURN(math__map_int(math__rand, 0, 1, 0, MAX_BYTE))
+  END math__rand_color
 
-ROUTINE SRAND
+
+ROUTINE math__rand_position
+  VAR
+    i :INTEGER
+    pos : XYZWPR
   BEGIN
-    m_seed = seed MOD (M_MODULUS-1)
-  END SRAND
+    -- use a 300mm cubed box
+    FOR i=1 TO 6 DO
+      math__srand(seed*i)
+      SELECT i OF
+        CASE (1):
+         pos.x = math__rand_range(0, 300)
+        CASE (2):
+         pos.y = math__rand_range(0, 300)
+        CASE (3):
+         pos.z = math__rand_range(0, 300)
+        CASE (4):
+         pos.w = math__rand_range(0, 90)
+        CASE (5):
+         pos.p = math__rand_range(0, 90)
+        CASE (6):
+         pos.r = math__rand_range(0, 90)
+      ENDSELECT
+    ENDFOR
+
+    RETURN(pos)
+  END math__rand_position
 
 
+ROUTINE math__rand_vector
+  VAR
+    i :INTEGER
+    v : VECTOR
+  BEGIN
+    -- use a 300mm cubed box
+    FOR i=1 TO 3 DO
+      math__srand(seed*i)
+      SELECT i OF
+        CASE (1):
+         v.x = math__rand_range(0, 300)
+        CASE (2):
+         v.y = math__rand_range(0, 300)
+        CASE (3):
+         v.z = math__rand_range(0, 300)
+      ENDSELECT
+    ENDFOR
 
+    RETURN(v)
+  END math__rand_vector
+
+
+ROUTINE math__rand_rarr
+  VAR
+    i :INTEGER
+  BEGIN
+    FOR i=1 TO ARRAY_LEN(out_arr) DO
+      math__srand(seed*i)
+      out_arr[i] = math__rand
+    ENDFOR
+  END math__rand_rarr
+
+ROUTINE math__translate
+  VAR
+    mat_trans : XYZWPR
+  BEGIN
+    --initialize
+    mat_trans.x = amount.x; mat_trans.y = amount.y ; mat_trans.z = amount.z;
+    mat_trans.w = 0; mat_trans.p = 0 ; mat_trans.r = 0;
+    --multiply
+    RETURN(pos:mat_trans)
+  END math__translate
+
+ROUTINE math__rotx
+  VAR
+    mat_rot : XYZWPR
+  BEGIN
+    --initialize
+    mat_rot.x = 0; mat_rot.y = 0 ; mat_rot.z = 0;
+    mat_rot.w = angle; mat_rot.p = 0 ; mat_rot.r = 0;
+    --multiply
+    RETURN(pos:mat_rot)
+  END math__rotx
+
+ROUTINE math__roty
+  VAR
+    mat_rot : XYZWPR
+  BEGIN
+    --initialize
+    mat_rot.x = 0; mat_rot.y = 0 ; mat_rot.z = 0;
+    mat_rot.w = 0; mat_rot.p = angle ; mat_rot.r = 0;
+    --multiply
+    RETURN(pos:mat_rot)
+  END math__roty
+
+ROUTINE math__rotz
+  VAR
+    mat_rot : XYZWPR
+  BEGIN
+    --initialize
+    mat_rot.x = 0; mat_rot.y = 0 ; mat_rot.z = 0;
+    mat_rot.w = 0; mat_rot.p = 0 ; mat_rot.r = angle;
+    --multiply
+    RETURN(pos:mat_rot)
+  END math__rotz
 
 BEGIN
 END math

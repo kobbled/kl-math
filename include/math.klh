@@ -1,25 +1,67 @@
 %ifndef math_h
 %define math_h
 
-ROUTINE POW(value, exponent : REAL) : REAL FROM math
-ROUTINE FLOOR(num : REAL) : INTEGER FROM math
-ROUTINE CEIL(num : REAL) : INTEGER FROM math
-ROUTINE DECIMAL(num : REAL; digits : INTEGER) : REAL FROM math
-ROUTINE LOG10(num : REAL) : REAL FROM math
-ROUTINE LOG2(num : REAL) : REAL FROM math
-ROUTINE MAX_i(numbers : ARRAY[*] OF INTEGER) : INTEGER FROM math
-ROUTINE MAX_r(numbers : ARRAY[*] OF REAL) : REAL FROM math
-ROUTINE MIN_i(numbers : ARRAY[*] OF INTEGER) : INTEGER FROM math
-ROUTINE MIN_r(numbers : ARRAY[*] OF REAL) : REAL FROM math
-ROUTINE MAP_r(x, in_min, in_max, out_min, out_max : REAL) : REAL FROM math
-ROUTINE MAP_i(x, in_min, in_max : REAL ; out_min, out_max : INTEGER) : INTEGER FROM math
-ROUTINE SRAND(seed : INTEGER) FROM math
-ROUTINE RAND : REAL FROM math
-ROUTINE RANDRNG(min : REAL ; max : REAL) : REAL FROM math
-ROUTINE RANDINT : INTEGER FROM math
-ROUTINE RANDCOLOR : INTEGER FROM math
-ROUTINE SUM_r(numbers : ARRAY[*] OF REAL) : REAL FROM math
-ROUTINE AVERAGE_r(numbers : ARRAY[*] OF REAL) : REAL FROM math
+%include namespace.m
+
+%define prog_name math
+%define prog_name_alias math
+
+-- namespaced members in format <prog_name_alias>__<func_name>
+declare(prog_name,pow,prog_name_alias,pow)
+declare(prog_name,floor,prog_name_alias,floor)
+declare(prog_name,ceil,prog_name_alias,ceil)
+declare(prog_name,decimal,prog_name_alias,decimal)
+declare(prog_name,log10,prog_name_alias,log10)
+declare(prog_name,log2,prog_name_alias,log2)
+declare(prog_name,max_int,prog_name_alias,maxint)
+declare(prog_name,max_real,prog_name_alias,maxreal)
+declare(prog_name,min_int,prog_name_alias,minint)
+declare(prog_name,min_real,prog_name_alias,minreal)
+declare(prog_name,map_real,prog_name_alias,mapreal)
+declare(prog_name,map_int,prog_name_alias,mapint)
+declare(prog_name,srand,prog_name_alias,srand)
+declare(prog_name,rand,prog_name_alias,rand)
+declare(prog_name,rand_range,prog_name_alias,randrng)
+declare(prog_name,rand_int,prog_name_alias,randint)
+declare(prog_name,rand_color,prog_name_alias,randrgb)
+declare(prog_name,rand_position,prog_name_alias,randpos)
+declare(prog_name,rand_vector,prog_name_alias,randvec)
+declare(prog_name,rand_rarr,prog_name_alias,randarr)
+declare(prog_name,sum_real,prog_name_alias,sumreal)
+declare(prog_name,average_real,prog_name_alias,avereal)
+declare(prog_name,translate,prog_name_alias,trans)
+declare(prog_name,rotx,prog_name_alias,rotx)
+declare(prog_name,roty,prog_name_alias,roty)
+declare(prog_name,rotz,prog_name_alias,rotz)
+
+
+ROUTINE math__pow(value, exponent : REAL) : REAL FROM math
+ROUTINE math__floor(num : REAL) : INTEGER FROM math
+ROUTINE math__ceil(num : REAL) : INTEGER FROM math
+ROUTINE math_decimal(num : REAL; digits : INTEGER) : REAL FROM math
+ROUTINE math__log10(num : REAL) : REAL FROM math
+ROUTINE math__log2(num : REAL) : REAL FROM math
+ROUTINE math__max_int(numbers : ARRAY[*] OF INTEGER) : INTEGER FROM math
+ROUTINE math__max_real(numbers : ARRAY[*] OF REAL) : REAL FROM math
+ROUTINE math__min_int(numbers : ARRAY[*] OF INTEGER) : INTEGER FROM math
+ROUTINE math__min_real(numbers : ARRAY[*] OF REAL) : REAL FROM math
+ROUTINE math__map_real(x, in_min, in_max, out_min, out_max : REAL) : REAL FROM math
+ROUTINE math__map_int(x, in_min, in_max : REAL ; out_min, out_max : INTEGER) : INTEGER FROM math
+ROUTINE math__srand(seed : INTEGER) FROM math
+ROUTINE math__rand : REAL FROM math
+ROUTINE math__rand_range(min : REAL ; max : REAL) : REAL FROM math
+ROUTINE math__rand_int : INTEGER FROM math
+ROUTINE math__rand_color : INTEGER FROM math
+ROUTINE math__rand_position(seed : INTEGER) : XYZWPR FROM math
+ROUTINE math__rand_vector(seed : INTEGER) : VECTOR FROM math
+ROUTINE math__rand_rarr(seed : INTEGER; out_arr : ARRAY[*] OF REAL) FROM math
+ROUTINE math__sum_real(numbers : ARRAY[*] OF REAL) : REAL FROM math
+ROUTINE math__average_real(numbers : ARRAY[*] OF REAL) : REAL FROM math
+
+ROUTINE math__translate(pos : XYZWPR ; amount : VECTOR) : XYZWPR FROM math
+ROUTINE math__rotx(pos : XYZWPR ; angle : REAL) : XYZWPR FROM math
+ROUTINE math__roty(pos : XYZWPR ; angle : REAL) : XYZWPR FROM math
+ROUTINE math__rotz(pos : XYZWPR ; angle : REAL) : XYZWPR FROM math
 
 
 %endif --math_h

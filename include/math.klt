@@ -29,6 +29,10 @@
 %define M_SQRT2    1.41421356237309504880
 -- 1/sqrt(2) 
 %define M_SQRT1_2  0.70710678118654752440
+-- radians to degree conversion
+%define M_RAD2DEG  57.29577951
+-- degree to radians conversion
+%define M_DEG2RAD  0.0174532925
 
 
 CONST

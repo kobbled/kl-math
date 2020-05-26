@@ -1,6 +1,16 @@
 %ifndef math_private_h
 %define math_private_h
 
-ROUTINE MAXMIN_(max_min : BOOLEAN ; num_r : ARRAY[*] OF REAL; max_i : INTEGER; max_r : REAL) FROM math
+%include namespace.m
+
+%define prog_name math
+%define prog_name_alias math
+
+-- namespaced members in format <prog_name_alias>__<func_name>
+declare(prog_name,maxmin_,prog_name_alias,maxmin_)
+
+
+ROUTINE math__maxmin_(max_min : BOOLEAN ; num_r : ARRAY[*] OF REAL; max_i : INTEGER; max_r : REAL) FROM math
+
 
 %endif --math_private_h

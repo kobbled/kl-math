@@ -15,35 +15,35 @@ VAR
 
 ROUTINE t_pow : BOOLEAN
   BEGIN
-    RETURN(kunit_eq_r(256, pow(2, 8)) AND kunit_eq_r(3, decimal(pow(M_E, ln(3)), 1) ) AND
-          kunit_eq_r(1, pow(1, M_E)) AND kunit_eq_r(70.0, decimal(pow(8.3666, 2), 1)))
+    RETURN(kunit_eq_r(256, math__pow(2, 8)) AND kunit_eq_r(3, math_decimal(math__pow(M_E, ln(3)), 1) ) AND
+          kunit_eq_r(1, math__pow(1, M_E)) AND kunit_eq_r(70.0, math_decimal(math__pow(8.3666, 2), 1)))
   END t_pow
 
 ROUTINE t_floor : BOOLEAN
   BEGIN
-    RETURN(kunit_eq_int(3, floor(M_PI)) AND kunit_eq_int(-3, floor(-2.5)))
+    RETURN(kunit_eq_int(3, math__floor(M_PI)) AND kunit_eq_int(-3, math__floor(-2.5)))
   END t_floor
 
 ROUTINE t_ceil : BOOLEAN
   BEGIN
-    RETURN(kunit_eq_int(4, ceil(M_PI)) AND kunit_eq_int(-2, ceil(-2.5)))
+    RETURN(kunit_eq_int(4, math__ceil(M_PI)) AND kunit_eq_int(-2, math__ceil(-2.5)))
   END t_ceil
 
 ROUTINE t_round : BOOLEAN
   BEGIN
-    RETURN(kunit_eq_r(3.142, decimal(M_PI, 3)) AND kunit_eq_r(-6.70, decimal(-6.6982, 2)))
+    RETURN(kunit_eq_r(3.142, math_decimal(M_PI, 3)) AND kunit_eq_r(-6.70, math_decimal(-6.6982, 2)))
   END t_round
 
 ROUTINE t_log10 : BOOLEAN
   BEGIN
-    RETURN(kunit_eq_r(0, log10(1)) AND kunit_eq_r(3, log10(1000)) AND
-           kunit_eq_r(1.69897, log10(50)))
+    RETURN(kunit_eq_r(0, math__log10(1)) AND kunit_eq_r(3, math__log10(1000)) AND
+           kunit_eq_r(1.69897, math__log10(50)))
   END t_log10
 
 ROUTINE t_log2 : BOOLEAN
   BEGIN
-    RETURN(kunit_eq_r(2, log2(4)) AND kunit_eq_r(6, log2(64)) AND
-           kunit_eq_r(2.321928, log2(5)))
+    RETURN(kunit_eq_r(2, math__log2(4)) AND kunit_eq_r(6, math__log2(64)) AND
+           kunit_eq_r(2.321928, math__log2(5)))
   END t_log2
 
 ROUTINE t_rand : BOOLEAN
@@ -54,34 +54,34 @@ ROUTINE t_rand : BOOLEAN
   BEGIN
     s_tme = '02-FEB-20 01:00'
     CNV_STR_TIME(s_tme, tme1)
-    SRAND(tme1)
-    b1 = kunit_eq_r(0.781, RAND)
+    math__srand(tme1)
+    b1 = kunit_eq_r(0.781, math__rand)
 
     s_tme = '02-FEB-20 02:00'
     CNV_STR_TIME(s_tme, tme2)
-    SRAND(tme2)
-    b2 = kunit_eq_r(0.437, RAND)
+    math__srand(tme2)
+    b2 = kunit_eq_r(0.437, math__rand)
 
     s_tme = '02-FEB-20 03:00'
     CNV_STR_TIME(s_tme, tme3)
-    SRAND(tme3)
-    b3 = kunit_eq_r(0.093, RAND)
+    math__srand(tme3)
+    b3 = kunit_eq_r(0.093, math__rand)
 
     s_tme = '02-FEB-20 04:00'
     CNV_STR_TIME(s_tme, tme4)
-    SRAND(tme4)
-    b4 = kunit_eq_r(0.750, RAND)
+    math__srand(tme4)
+    b4 = kunit_eq_r(0.750, math__rand)
 
     RETURN(b1 AND b2 AND b3 AND b4)
   END t_rand
 
 ROUTINE t_map : BOOLEAN
   BEGIN
-    RETURN(kunit_eq_r(500, MAP_r(0.5, 0, 1, 0, 1000)) AND &
-           kunit_eq_r(M_PI_2, MAP_r(M_PI, 0, M_PI, 0, M_PI_2)) AND &
-           kunit_eq_r(2.441, MAP_r(1000, 0, pow(2, 11), 0, 5)) AND &
-           kunit_eq_int(50, MAP_i(0.5, 0, 1, 0, 100)) AND &
-           kunit_eq_int(127, MAP_i(512, 0, 1023, 0, 255)) )
+    RETURN(kunit_eq_r(500, math__map_real(0.5, 0, 1, 0, 1000)) AND &
+           kunit_eq_r(M_PI_2, math__map_real(M_PI, 0, M_PI, 0, M_PI_2)) AND &
+           kunit_eq_r(2.441, math__map_real(1000, 0, math__pow(2, 11), 0, 5)) AND &
+           kunit_eq_int(50, math__map_int(0.5, 0, 1, 0, 100)) AND &
+           kunit_eq_int(127, math__map_int(512, 0, 1023, 0, 255)) )
   END t_map
 
 ROUTINE t_rand_int : BOOLEAN
@@ -92,23 +92,23 @@ ROUTINE t_rand_int : BOOLEAN
   BEGIN
     s_tme = '02-FEB-20 01:00'
     CNV_STR_TIME(s_tme, tme1)
-    SRAND(tme1)
-    b1 = kunit_eq_int(25601, RANDINT)
+    math__srand(tme1)
+    b1 = kunit_eq_int(25601, math__rand_int)
 
     s_tme = '02-FEB-20 02:00'
     CNV_STR_TIME(s_tme, tme2)
-    SRAND(tme2)
-    b2 = kunit_eq_int(14337, RANDINT)
+    math__srand(tme2)
+    b2 = kunit_eq_int(14337, math__rand_int)
 
     s_tme = '02-FEB-20 03:00'
     CNV_STR_TIME(s_tme, tme3)
-    SRAND(tme3)
-    b3 = kunit_eq_int(23, RANDCOLOR)
+    math__srand(tme3)
+    b3 = kunit_eq_int(23, math__rand_color)
 
     s_tme = '02-FEB-20 04:00'
     CNV_STR_TIME(s_tme, tme4)
-    SRAND(tme4)
-    b4 = kunit_eq_int(191, RANDCOLOR)
+    math__srand(tme4)
+    b4 = kunit_eq_int(191, math__rand_color)
 
     RETURN(b1 AND b2 AND b3 AND b4)
 
@@ -123,15 +123,31 @@ ROUTINE t_rand_arr : BOOLEAN
   BEGIN
     s_tme = '02-FEB-20 20:20'
     CNV_STR_TIME(s_tme, tme)
-    FOR i=1 TO ARRAY_LEN(arr) DO
-      SRAND(tme*i)
-      arr[i] = ABS(RAND)
-    ENDFOR
+
+    math__rand_rarr(tme, arr)
 
     s_to_rarr('0.08,0.667,0.414,0.454,0.292,0.039,0.829,0.917,0.664,0.204',',', sol_arr)
 
     RETURN(kunit_eq_arr(sol_arr, arr))
   END t_rand_arr
+
+ROUTINE t_rand_pos : BOOLEAN
+  VAR
+    i    : INTEGER
+    s_tme  : STRING[16]
+    tme : INTEGER
+    pos, sol_pos : XYZWPR
+  BEGIN
+    s_tme = '02-FEB-20 20:20'
+    CNV_STR_TIME(s_tme, tme)
+    
+    pos = math__rand_position(tme)
+
+    sol_pos.x = 24.038 ; sol_pos.y = 200.092 ; sol_pos.z = 124.216 ;
+    sol_pos.w = 40.929 ; sol_pos.p = 26.31 ; sol_pos.r = 3.547 ;
+
+    RETURN(kunit_eq_pos(sol_pos, pos))
+  END t_rand_pos
 
 
 ROUTINE t_sum : BOOLEAN
@@ -145,10 +161,10 @@ ROUTINE t_sum : BOOLEAN
     s_tme = '02-FEB-20 20:20'
     CNV_STR_TIME(s_tme, tme)
     FOR i=1 TO ARRAY_LEN(arr1) DO
-      SRAND(tme*i)
-      arr1[i] = ABS(RAND)
+      math__srand(tme*i)
+      arr1[i] = ABS(math__rand)
     ENDFOR
-    sum = sum_r(arr1)
+    sum = math__sum_real(arr1)
     RETURN(kunit_eq_r(4.564, sum))
   END t_sum
 
@@ -162,7 +178,7 @@ ROUTINE t_count_even : BOOLEAN
     FOR i=1 TO ARRAY_LEN(arr1) DO
       arr1[i] = i MOD 2
     ENDFOR
-    sum = sum_r(arr1)
+    sum = math__sum_real(arr1)
     RETURN(kunit_eq_r(5, sum))
   END t_count_even
 
@@ -177,9 +193,50 @@ ROUTINE t_average : BOOLEAN
       arr1[i] = i
     ENDFOR
 
-    ave = average_r(arr1)
+    ave = math__average_real(arr1)
     RETURN(kunit_eq_r(5.5, ave))
   END t_average
+
+ROUTINE t_matmul : BOOLEAN
+  VAR
+    origin : XYZWPR
+    expected1, expected2, expected3  : XYZWPR
+    pos1 : XYZWPR
+    v1, v2 : VECTOR
+  BEGIN
+    origin.x = 0 ; origin.y = 0 ; origin.z = 0 ;
+    origin.w = 90 ; origin.p = 0 ; origin.r = 90 ;
+
+    --expected1
+    --rotate -30 deg in w and then translate 300 in y
+    expected1.x =  -150.0 ; expected1.y = 0 ; expected1.z = 259.808 ;
+    expected1.w = 60 ; expected1.p = 0 ; expected1.r = 90 ;
+    --translate1
+    v1.x = 0 ; v1.y = 300 ; v1.z = 0 ; 
+
+    --expected2
+    --rotate 90 in r, -45 in p, translate 200mm in z and -150mm in x,
+    --then reverse z rotation
+    expected2.x =  35.355 ; expected2.y = 0 ; expected2.z = -247.487 ;
+    expected2.w = 135 ; expected2.p = 0 ; expected2.r = 90 ;
+    --translate2
+    v2.x = -150 ; v2.y = 0 ; v2.z = 200 ;
+
+    --rotate 45, 90, then 180 in x,y,z respectively
+    expected3.x =  0 ; expected3.y = 0 ; expected3.z = 0 ;
+    expected3.w = -90 ; expected3.p = 45 ; expected3.r = 0 ;
+
+    pos1 = math__rotz(math__roty(math__rotx((origin), 45), 90), 180)
+
+    --display__clear
+    --WRITE TPDISPLAY(CR,p_to_s(pos1))
+    --display__show
+
+  RETURN(kunit_eq_pos(origin, math__rotz(math__roty(math__roty(math__rotz((origin), 20), 45), -45), -20)) AND &
+         kunit_eq_pos(expected1, math__translate(math__rotx((origin), -30), v1)) AND &
+         kunit_eq_pos(expected2, math__rotz(math__translate(math__roty(math__rotz((origin), 90), -45), v2), -90)) AND &
+         kunit_eq_pos(expected3, math__rotz(math__roty(math__rotx((origin), 45), 90), 180)) )
+  END t_matmul
 
 BEGIN
   kunit_test('test_power()', t_pow)
@@ -192,9 +249,11 @@ BEGIN
   kunit_test('test map function', t_map)
   kunit_test('test random integers', t_rand_int)
   kunit_test('test random array', t_rand_arr)
+  kunit_test('test random position', t_rand_pos)
   kunit_test('test sum of rand', t_sum)
   kunit_test('test count even numbers', t_count_even)
   kunit_test('test average numbers', t_average)
+  kunit_test('test maxtrix multiplication', t_matmul)
 
   kunit_done
 END test_math
