@@ -16,8 +16,8 @@
     "include"
   ],
   "tests" : [
-    "src/test/test_math.kl",
-    "src/test/test_ls_math.tpp"
+    "test/test_math.kl",
+    "test/test_ls_math.tpp"
   ],
   "depends" : [
     "KUnit",
