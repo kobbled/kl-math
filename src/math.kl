@@ -9,12 +9,30 @@ PROGRAM math
 %include math.klt
 
 %include math.private.klh
+%include math.builtins.klh
 %include math.klh
 
 %include errors.klh
 %include strings.klh
 
+--built ins
+ROUTINE math__abs
+  BEGIN
+    RETURN(ABS(val))
+  END math__abs
 
+ROUTINE math__exp
+  BEGIN
+    RETURN(EXP(val))
+  END math__exp
+
+ROUTINE math__sqrt
+  BEGIN
+    RETURN(SQRT(val))
+  END math__sqrt
+
+
+--opts
 ROUTINE math__pow
   BEGIN
     RETURN(EXP(exponent * LN(value)))

@@ -6,11 +6,7 @@
   "license" : "Apache 2.0",
   "author" : "kobbled",
   "source" : [
-    "src/math.kl",
-    "src/tp/abs.kl",
-    "src/tp/sqrt.kl",
-    "src/tp/exp.kl",
-    "src/tp/pow.kl"
+    "src/math.kl"
   ],
   "includes" : [
     "include"
@@ -27,5 +23,11 @@
     "display",
     "TPElib",
     "ktransw-macros"
+  ],
+  "tp-interfaces" : [
+    {"routine" : "math__abs", "program_name" : "mth_abs"},
+    {"routine" : "math__exp", "program_name" : "mth_exp"},
+    {"routine" : "math__sqrt", "program_name" : "mth_sqrt"},
+    {"routine" : "math__pow", "program_name" : "mth_pow"}
   ]
 }

@@ -1,0 +1,18 @@
+PROGRAM mth_pow
+%NOBUSYLAMP
+%NOLOCKGROUP
+
+VAR
+	reg_no : INTEGER
+	value : REAL
+	exponent : REAL
+%include tpe.klh
+%include registers.klh
+%include math.klh
+
+BEGIN
+	value = tpe__get_real_arg(1)
+	exponent = tpe__get_real_arg(2)
+	reg_no = tpe__get_int_arg(3)
+	registers__set_real(reg_no, math__pow(value,exponent))
+END mth_pow

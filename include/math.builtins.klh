@@ -1,0 +1,18 @@
+%ifndef math_builtins_h
+%define math_builtins_h
+
+%include namespace.m
+
+%define prog_name math
+%define prog_name_alias math
+
+-- namespaced members in format <prog_name_alias>__<func_name>
+declare(prog_name,abs,prog_name_alias,abs)
+declare(prog_name,exp,prog_name_alias,exp)
+declare(prog_name,sqrt,prog_name_alias,sqrt)
+
+ROUTINE math__abs(val : REAL) : REAL FROM math
+ROUTINE math__exp(val : REAL) : REAL FROM math
+ROUTINE math__sqrt(val : REAL) : REAL FROM math
+
+%endif --math_builtins_h

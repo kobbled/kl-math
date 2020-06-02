@@ -1,0 +1,16 @@
+PROGRAM mth_abs
+%NOBUSYLAMP
+%NOLOCKGROUP
+
+VAR
+	reg_no : INTEGER
+	val : REAL
+%include tpe.klh
+%include registers.klh
+%include math.builtins.klh
+
+BEGIN
+	val = tpe__get_real_arg(1)
+	reg_no = tpe__get_int_arg(2)
+	registers__set_real(reg_no, math__abs(val))
+END mth_abs
