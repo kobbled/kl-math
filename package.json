@@ -13,7 +13,7 @@
   ],
   "tests" : [
     "test/test_math.kl",
-    "test/test_ls_math.tpp"
+    "test/test_ls_math.ls"
   ],
   "depends" : [
     "KUnit",
