@@ -5,6 +5,7 @@ PROGRAM math
 %NOLOCKGROUP
 %NOPAUSE = COMMAND + TPENABLE + ERROR
 
+%include errors.klt
 %include math.private.klt
 %include math.klt
 
@@ -100,7 +101,7 @@ ROUTINE math_decimal
       CNV_STR_REAL(s, rNum)
       
       IF UNINIT(rNum) THEN
-        karelError(s + ' is not an number', 2)
+        karelError(EXPECTED_REAL, s + ' is not an number', 2)
       ENDIF
       
       RETURN(rNum) 
@@ -173,7 +174,10 @@ ROUTINE math__sum_real
   BEGIN
     sum = 0
     FOR i=1 TO ARRAY_LEN(numbers) DO
-      sum = sum + numbers[i]
+      -- exclude unitialized values from array
+      IF NOT UNINIT(numbers[i]) THEN
+        sum = sum + numbers[i]
+      ENDIF
     ENDFOR
 
     RETURN(sum)
@@ -181,16 +185,25 @@ ROUTINE math__sum_real
 
 ROUTINE math__average_real
   VAR
-    i   : INTEGER
+    i,n  : INTEGER
     ave : REAL
   BEGIN
     ave = 0
+    --actual number count
+    n = 0
     FOR i=1 TO ARRAY_LEN(numbers) DO
-      ave = ave + numbers[i]
+      -- exclude unitialized values from array
+      IF NOT UNINIT(numbers[i]) THEN
+        ave = ave + numbers[i]
+        n = n + 1
+      ENDIF
     ENDFOR
 
-    ave = ave/ARRAY_LEN(numbers)
+    IF (n = 0) THEN
+      RETURN(0)
+    ENDIF
 
+    ave = ave/n
     RETURN(ave)
   END math__average_real
 

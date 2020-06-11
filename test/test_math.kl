@@ -197,6 +197,23 @@ ROUTINE t_average : BOOLEAN
     RETURN(kunit_eq_r(5.5, ave))
   END t_average
 
+ROUTINE t_ave_uninit : BOOLEAN
+  VAR
+    i    : INTEGER
+    arr1 : ARRAY[10] OF REAL
+    ave   : REAL
+  BEGIN
+    FOR i=1 TO ARRAY_LEN(arr1) DO
+      --only insert values every other value
+      IF (i MOD 2 = 0) THEN
+        arr1[i] = i
+      ENDIF
+    ENDFOR
+
+    ave = math__average_real(arr1)
+    RETURN(kunit_eq_r(6.0, ave))
+  END t_ave_uninit
+
 ROUTINE t_matmul : BOOLEAN
   VAR
     origin : XYZWPR
@@ -239,6 +256,7 @@ ROUTINE t_matmul : BOOLEAN
   END t_matmul
 
 BEGIN
+  -- 16 tests
   kunit_test('test_power()', t_pow)
   kunit_test('test_floor()', t_floor)
   kunit_test('test_ceiling()', t_ceil)
@@ -253,6 +271,7 @@ BEGIN
   kunit_test('test sum of rand', t_sum)
   kunit_test('test count even numbers', t_count_even)
   kunit_test('test average numbers', t_average)
+  kunit_test('test average uninitialized array',t_ave_uninit)
   kunit_test('test maxtrix multiplication', t_matmul)
 
   kunit_done
