@@ -7,9 +7,7 @@
 %define prog_name_alias math
 
 -- namespaced members in format <prog_name_alias>__<func_name>
-declare(prog_name,maxmin_,prog_name_alias,maxmin_)
-
-
+declare_function(prog_name,maxmin_,prog_name_alias,maxmin_)
 ROUTINE math__maxmin_(max_min : BOOLEAN ; num_r : ARRAY[*] OF REAL; max_i : INTEGER; max_r : REAL) FROM math
 
 
