@@ -8,8 +8,8 @@ VAR
 %include math.klt
 %include display.c.klt
 
-%include strings.klh
-%include display.klh
+%from strings.klh %import s_to_rarr
+%from display.klh %import clear, show
 %include kunit.klh
 %include math.klh
 

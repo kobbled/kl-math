@@ -14,7 +14,7 @@ PROGRAM math
 %include math.klh
 
 %include errors.klh
-%include strings.klh
+%from strings.klh %import lstrip
 
 --built ins
 ROUTINE math__abs

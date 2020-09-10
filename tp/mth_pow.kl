@@ -6,9 +6,9 @@ VAR
 	reg_no : INTEGER
 	value : REAL
 	exponent : REAL
-%include tpe.klh
-%include registers.klh
-%include math.klh
+%from tpe.klh %import get_real_arg,get_int_arg
+%from registers.klh %import set_real
+%from math.klh %import pow
 
 BEGIN
 	value = tpe__get_real_arg(1)

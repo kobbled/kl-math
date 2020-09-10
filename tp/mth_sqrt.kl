@@ -5,9 +5,9 @@ PROGRAM mth_sqrt
 VAR
 	reg_no : INTEGER
 	val : REAL
-%include tpe.klh
-%include registers.klh
-%include math.builtins.klh
+%from tpe.klh %import get_real_arg,get_int_arg
+%from registers.klh %import set_real
+%from math.builtins.klh %import sqrt
 
 BEGIN
 	val = tpe__get_real_arg(1)
