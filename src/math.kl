@@ -71,6 +71,15 @@ ROUTINE math__ceil
     RETURN(trun_num)
   END math__ceil
 
+ROUTINE math__round
+  BEGIN
+    IF (ABS(num) - TRUNC(ABS(num))) >=0.5 THEN
+      RETURN(math__ceil(num))
+    ELSE
+      RETURN(math__floor(num))
+    ENDIF
+  END math__round
+
 ROUTINE math_decimal
   VAR
     s : STRING[16]
@@ -106,7 +115,8 @@ ROUTINE math_decimal
       
       RETURN(rNum) 
   END math_decimal
-
+  
+--array math
 ROUTINE math__max_int
   VAR
     max : INTEGER
@@ -311,6 +321,13 @@ ROUTINE math__rand_rarr
     ENDFOR
   END math__rand_rarr
 
+-- vector math
+ROUTINE math__norm
+  BEGIN
+    RETURN(SQRT(v.x*v.x + v.y*v.y + v.z*v.z))
+  END math__norm
+
+-- matrix convolutions
 ROUTINE math__translate
   VAR
     mat_trans : XYZWPR

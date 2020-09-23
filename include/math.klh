@@ -13,6 +13,8 @@ declare_function(prog_name,floor,prog_name_alias,floor)
 ROUTINE math__floor(num : REAL) : INTEGER FROM math
 declare_function(prog_name,ceil,prog_name_alias,ceil)
 ROUTINE math__ceil(num : REAL) : INTEGER FROM math
+declare_function(prog_name,round,prog_name_alias,round)
+ROUTINE math__round(num : REAL) : INTEGER FROM math
 declare_function(prog_name,decimal,prog_name_alias,decimal)
 ROUTINE math__decimal(num : REAL; digits : INTEGER) : REAL FROM math
 declare_function(prog_name,log10,prog_name_alias,log10)
@@ -53,6 +55,9 @@ declare_function(prog_name,sum_real,prog_name_alias,sumreal)
 ROUTINE math__sum_real(numbers : ARRAY[*] OF REAL) : REAL FROM math
 declare_function(prog_name,average_real,prog_name_alias,avereal)
 ROUTINE math__average_real(numbers : ARRAY[*] OF REAL) : REAL FROM math
+-- vector math
+declare_function(prog_name,norm,prog_name_alias,norm)
+ROUTINE math__norm(v : VECTOR) : REAL FROM math
 -- matrix convolutions
 declare_function(prog_name,translate,prog_name_alias,trans)
 ROUTINE math__translate(pos : XYZWPR ; amount : VECTOR) : XYZWPR FROM math
@@ -62,6 +67,6 @@ declare_function(prog_name,roty,prog_name_alias,roty)
 ROUTINE math__roty(pos : XYZWPR ; angle : REAL) : XYZWPR FROM math
 declare_function(prog_name,rotz,prog_name_alias,rotz)
 ROUTINE math__rotz(pos : XYZWPR ; angle : REAL) : XYZWPR FROM math
-
+-- algorithms
 
 %endif --math_h

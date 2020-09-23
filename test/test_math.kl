@@ -8,7 +8,7 @@ VAR
 %include math.klt
 %include display.c.klt
 
-%from strings.klh %import s_to_rarr
+%from strings.klh %import s_to_rarr, s_to_vec
 %from display.klh %import clear, show
 %include kunit.klh
 %include math.klh
@@ -255,24 +255,38 @@ ROUTINE t_matmul : BOOLEAN
          kunit_eq_pos(expected3, math__rotz(math__roty(math__rotx((origin), 45), 90), 180)) )
   END t_matmul
 
+
+ROUTINE t_norm : BOOLEAN
+  VAR
+    v1, v2 : VECTOR
+  BEGIN
+    v1.x = 2; v1.y = -1; v1.z = -5;
+    v2.x = 4; v2.y = -3; v2.z = 1;
+
+    RETURN( kunit_eq_r(3.7417, math__norm(s_to_vec('-3,2,1',',')) ) AND &
+            kunit_eq_r(6.6332, math__norm(v2-v1)) )
+  END t_norm
+
 BEGIN
-  -- 16 tests
-  kunit_test('test_power()', t_pow)
-  kunit_test('test_floor()', t_floor)
-  kunit_test('test_ceiling()', t_ceil)
-  kunit_test('test_rounding()', t_round)
-  kunit_test('test_log10()', t_log10)
-  kunit_test('test_log2()', t_log2)
-  kunit_test('test random number', t_rand)
-  kunit_test('test map function', t_map)
-  kunit_test('test random integers', t_rand_int)
-  kunit_test('test random array', t_rand_arr)
-  kunit_test('test random position', t_rand_pos)
-  kunit_test('test sum of rand', t_sum)
-  kunit_test('test count even numbers', t_count_even)
-  kunit_test('test average numbers', t_average)
-  kunit_test('test average uninitialized array',t_ave_uninit)
-  kunit_test('test maxtrix multiplication', t_matmul)
+  --asserts 41
+  -- 17 tests
+  kunit_test('test_power()', t_pow) --assert 4
+  kunit_test('test_floor()', t_floor) --assert 2
+  kunit_test('test_ceiling()', t_ceil) --assert 2
+  kunit_test('test_rounding()', t_round) --assert 2
+  kunit_test('test_log10()', t_log10) -- assert 3
+  kunit_test('test_log2()', t_log2) -- assert 3
+  kunit_test('test random number', t_rand) --assert 4
+  kunit_test('test map function', t_map) -- assert 5
+  kunit_test('test random integers', t_rand_int) --assert 4
+  kunit_test('test random array', t_rand_arr) -- assert 1
+  kunit_test('test random position', t_rand_pos) -- assert 1
+  kunit_test('test sum of rand', t_sum) -- assert 1
+  kunit_test('test count even numbers', t_count_even) -- assert 1
+  kunit_test('test average numbers', t_average) -- assert 1
+  kunit_test('test average uninitialized array',t_ave_uninit) -- assert 1
+  kunit_test('test maxtrix multiplication', t_matmul) -- assert 4
+  kunit_test('test vector norm', t_norm) --assert 2
 
   kunit_done
 END test_math
