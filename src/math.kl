@@ -32,6 +32,16 @@ ROUTINE math__sqrt
     RETURN(SQRT(val))
   END math__sqrt
 
+ROUTINE math__atan2
+  BEGIN
+    RETURN(ATAN2(ajacent, opposite))
+  END math__atan2
+
+ROUTINE math__atan_pos
+  BEGIN
+    RETURN(ATAN2(pose.x, pose.y))
+  END math__atan_pos
+
 
 --opts
 ROUTINE math__pow

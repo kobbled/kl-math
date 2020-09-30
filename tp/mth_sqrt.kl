@@ -3,14 +3,14 @@ PROGRAM mth_sqrt
 %NOLOCKGROUP
 
 VAR
-	reg_no : INTEGER
+	out_reg : INTEGER
 	val : REAL
-%from tpe.klh %import get_int_arg,get_real_arg
+%from tpe.klh %import get_real_arg,get_int_arg
 %from registers.klh %import set_real
 %from math.builtins.klh %import sqrt
 
 BEGIN
 	val = tpe__get_real_arg(1)
-	reg_no = tpe__get_int_arg(2)
-	registers__set_real(reg_no, math__sqrt(val))
+	out_reg = tpe__get_int_arg(2)
+	registers__set_real(out_reg, math__sqrt(val))
 END mth_sqrt

@@ -1,0 +1,18 @@
+PROGRAM mth_atan2
+%NOBUSYLAMP
+%NOLOCKGROUP
+
+VAR
+	out_reg : INTEGER
+	opposite : REAL
+	ajacent : REAL
+%from tpe.klh %import get_real_arg,get_int_arg
+%from registers.klh %import set_real
+%from math.builtins.klh %import atan2
+
+BEGIN
+	opposite = tpe__get_real_arg(1)
+	ajacent = tpe__get_real_arg(2)
+	out_reg = tpe__get_int_arg(3)
+	registers__set_real(out_reg, math__atan2(opposite,ajacent))
+END mth_atan2

@@ -19,15 +19,18 @@
     "KUnit",
     "Strings",
     "errors",
-    "registers",
     "display",
     "TPElib",
+    "registers",
+    "pose",
     "ktransw-macros"
   ],
   "tp-interfaces" : [
     {"routine" : "math__abs", "program_name" : "mth_abs"},
     {"routine" : "math__exp", "program_name" : "mth_exp"},
     {"routine" : "math__sqrt", "program_name" : "mth_sqrt"},
-    {"routine" : "math__pow", "program_name" : "mth_pow"}
+    {"routine" : "math__pow", "program_name" : "mth_pow"},
+    {"routine" : "math__atan2", "program_name" : "mth_atan2"},
+    {"routine" : "math__atan_pos", "program_name" : "mth_atan_pos"}
   ]
 }
