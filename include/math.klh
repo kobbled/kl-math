@@ -58,6 +58,16 @@ ROUTINE math__average_real(numbers : ARRAY[*] OF REAL) : REAL FROM math
 -- vector math
 declare_function(prog_name,norm,prog_name_alias,norm)
 ROUTINE math__norm(v : VECTOR) : REAL FROM math
+declare_function(prog_name,norm2,prog_name_alias,norm2)
+ROUTINE math__norm2(v : VECTOR) : REAL FROM math
+declare_function(prog_name,proj,prog_name_alias,prja)
+ROUTINE math__proj(v : VECTOR ; ax : VECTOR) : VECTOR FROM math
+declare_function(prog_name,proj_orthoganal,prog_name_alias,prjort)
+ROUTINE math__proj_orthoganal(v : VECTOR ; ax : VECTOR) : VECTOR FROM math
+declare_function(prog_name,proj_length,prog_name_alias,prjlen)
+ROUTINE math__proj_length(v : VECTOR ; ax : VECTOR) : REAL FROM math
+
+
 -- matrix convolutions
 declare_function(prog_name,translate,prog_name_alias,trans)
 ROUTINE math__translate(pos : XYZWPR ; amount : VECTOR) : XYZWPR FROM math

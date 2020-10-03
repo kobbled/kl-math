@@ -337,6 +337,27 @@ ROUTINE math__norm
     RETURN(SQRT(v.x*v.x + v.y*v.y + v.z*v.z))
   END math__norm
 
+ROUTINE math__norm2
+  BEGIN
+    RETURN(v.x*v.x + v.y*v.y + v.z*v.z)
+  END math__norm2
+
+ROUTINE math__proj
+  BEGIN
+    RETURN( (v@ax)/math__norm2(ax)*ax )
+  END math__proj
+
+ROUTINE math__proj_orthoganal
+  BEGIN
+    RETURN( v - math__proj(v, ax) )
+  END math__proj_orthoganal
+
+ROUTINE math__proj_length
+  BEGIN
+    RETURN( ABS(v@ax)/math__norm(ax) )
+  END math__proj_length
+  
+
 -- matrix convolutions
 ROUTINE math__translate
   VAR
