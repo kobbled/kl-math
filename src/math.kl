@@ -32,6 +32,16 @@ ROUTINE math__sqrt
     RETURN(SQRT(val))
   END math__sqrt
 
+ROUTINE math__sin
+  BEGIN
+    RETURN(SIN(angle))
+  END math__sin
+
+ROUTINE math__cos
+  BEGIN
+    RETURN(COS(angle))
+  END math__cos
+
 ROUTINE math__atan2
   BEGIN
     RETURN(ATAN2(ajacent, opposite))

@@ -12,6 +12,10 @@ declare_function(prog_name,exp,prog_name_alias,exp)
 ROUTINE math__exp(val : REAL) : REAL FROM math
 declare_function(prog_name,sqrt,prog_name_alias,sqrt)
 ROUTINE math__sqrt(val : REAL) : REAL FROM math
+declare_function(prog_name,sin,prog_name_alias,sin)
+ROUTINE math__sin(angle : REAL) : REAL FROM math
+declare_function(prog_name,cos,prog_name_alias,cos)
+ROUTINE math__cos(angle : REAL) : REAL FROM math
 declare_function(prog_name,atan2,prog_name_alias,atan)
 ROUTINE math__atan2(opposite : REAL ; ajacent : REAL) : REAL FROM math
 declare_function(prog_name,atan_pos,prog_name_alias,atanp)

@@ -7,7 +7,7 @@ VAR
 	pr_num1 : INTEGER
 	pose : XYZWPR
 	grp_no : INTEGER
-%from tpe.klh %import get_int_arg,get_xyzwpr_arg
+%from tpe.klh %import get_xyzwpr_arg,get_int_arg
 %from registers.klh %import set_real
 %from pose.klh %import get_posreg_xyz, get_posreg_joint, set_posreg_xyz, set_posreg_joint
 %from math.builtins.klh %import atan_pos
