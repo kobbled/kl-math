@@ -71,6 +71,8 @@ declare_function(prog_name,proj_orthoganal,prog_name_alias,prjort)
 ROUTINE math__proj_orthoganal(v : VECTOR ; ax : VECTOR) : VECTOR FROM math
 declare_function(prog_name,proj_length,prog_name_alias,prjlen)
 ROUTINE math__proj_length(v : VECTOR ; ax : VECTOR) : REAL FROM math
+declare_function(prog_name,average_vector,prog_name_alias,avevec)
+ROUTINE math__average_vector(arrv : ARRAY[*] OF VECTOR) : VECTOR FROM math
 
 
 -- matrix convolutions

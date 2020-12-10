@@ -456,6 +456,35 @@ ROUTINE math__proj_length
   BEGIN
     RETURN( ABS(v@ax)/math__norm(ax) )
   END math__proj_length
+
+ROUTINE math__average_vector
+  VAR
+    i,n  : INTEGER
+    ave : VECTOR
+  BEGIN
+    ave.x = 0 ; ave.y = 0; ave.z = 0;
+    --actual number count
+    n = 0
+    FOR i=1 TO ARRAY_LEN(arrv) DO
+      -- exclude unitialized values from array
+      IF NOT UNINIT(arrv[i]) THEN
+        ave.x = ave.x + arrv[i].x
+        ave.y = ave.y + arrv[i].y
+        ave.z = ave.z + arrv[i].z
+        n = n + 1
+      ENDIF
+    ENDFOR
+
+    IF (n = 0) THEN
+      RETURN(ave)
+    ENDIF
+
+    ave.x = ave.x/n
+    ave.y = ave.y/n
+    ave.z = ave.z/n
+
+    RETURN(ave)
+  END math__average_vector
   
 
 -- matrix convolutions
