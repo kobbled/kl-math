@@ -55,6 +55,11 @@ declare_function(prog_name,sum_real,prog_name_alias,sumreal)
 ROUTINE math__sum_real(numbers : ARRAY[*] OF REAL) : REAL FROM math
 declare_function(prog_name,average_real,prog_name_alias,avereal)
 ROUTINE math__average_real(numbers : ARRAY[*] OF REAL) : REAL FROM math
+declare_function(prog_name,quicksort_real,prog_name_alias,qsortr)
+ROUTINE math__quicksort_real(arr : ARRAY[*] OF REAL) FROM math
+declare_function(prog_name,quicksort_int,prog_name_alias,qsorti)
+ROUTINE math__quicksort_int(arr : ARRAY[*] OF INTEGER) FROM math
+
 -- vector math
 declare_function(prog_name,norm,prog_name_alias,norm)
 ROUTINE math__norm(v : VECTOR) : REAL FROM math

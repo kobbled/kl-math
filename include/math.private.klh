@@ -10,5 +10,8 @@
 declare_function(prog_name,maxmin_,prog_name_alias,maxmin_)
 ROUTINE math__maxmin_(max_min : BOOLEAN ; num_r : ARRAY[*] OF REAL; max_i : INTEGER; max_r : REAL) FROM math
 
-
+ROUTINE partition_r(arr : ARRAY[*] OF REAL; low, high : INTEGER) : INTEGER FROM math
+ROUTINE partition_i(arr : ARRAY[*] OF INTEGER; low, high : INTEGER) : INTEGER FROM math
+ROUTINE quicksort_r(arr : ARRAY[*] OF REAL; low, high : INTEGER) FROM math
+ROUTINE quicksort_i(arr : ARRAY[*] OF INTEGER; low, high : INTEGER) FROM math
 %endif --math_private_h

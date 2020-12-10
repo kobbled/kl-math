@@ -4,11 +4,12 @@ PROGRAM test_math
 VAR
   entry : INTEGER
   status : INTEGER
+  -- randarr : ARRAY[200] OF REAL
 
 %include math.klt
 %include display.c.klt
 
-%from strings.klh %import s_to_rarr, s_to_vec
+%from strings.klh %import s_to_rarr, s_to_iarr, s_to_vec
 %from display.klh %import clear, show
 %include kunit.klh
 %include math.klh
@@ -267,9 +268,38 @@ ROUTINE t_norm : BOOLEAN
             kunit_eq_r(6.6332, math__norm(v2-v1)) )
   END t_norm
 
+ROUTINE t_sort : BOOLEAN
+  VAR
+    arr1, exp1 : ARRAY[10] OF INTEGER
+    arr2, exp2 : ARRAY[10] OF REAL
+    
+    s_tme : STRING[14]
+    tme : INTEGER
+  BEGIN
+    --populate and sort
+    s_to_iarr('99,73,81,17,89,85,44,36,51,6',',',arr1)
+    math__quicksort_int(arr1)
+
+    s_to_rarr('17.75,65.77,96.02,27.65,25.22,3.04,13.53,28.45,49.12,69.72',',',arr2)
+    math__quicksort_real(arr2)
+
+    --expected
+    s_to_iarr('6,17,36,44,51,73,81,85,89,99',',',exp1)
+    s_to_rarr('3.04,13.53,17.75,25.22,27.65,28.45,49.12,65.77,69.72,96.02',',',exp2)
+
+    --test overflow
+    --get random real array
+    -- s_tme = '10-DEC-20 8:00'
+    -- CNV_STR_TIME(s_tme, tme)
+    -- math__rand_rarr(tme, randarr)
+    -- math__quicksort_real(randarr)
+
+    RETURN( kunit_eq_ari(exp1, arr1) AND kunit_eq_arr(exp2, arr2) )
+  END t_sort
+
 BEGIN
-  --asserts 41
-  -- 17 tests
+  --asserts 43
+  -- 18 tests
   kunit_test('test_power()', t_pow) --assert 4
   kunit_test('test_floor()', t_floor) --assert 2
   kunit_test('test_ceiling()', t_ceil) --assert 2
@@ -287,6 +317,7 @@ BEGIN
   kunit_test('test average uninitialized array',t_ave_uninit) -- assert 1
   kunit_test('test maxtrix multiplication', t_matmul) -- assert 4
   kunit_test('test vector norm', t_norm) --assert 2
+  kunit_test('test sorting', t_sort) --assert 2
 
   kunit_done
 END test_math

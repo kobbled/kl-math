@@ -237,6 +237,96 @@ ROUTINE math__average_real
     RETURN(ave)
   END math__average_real
 
+ROUTINE partition_r
+  VAR
+    i,j : INTEGER
+    pivot : REAL
+    swap : REAL
+  BEGIN
+    pivot = arr[high]
+
+    i = low - 1
+    FOR j = low TO (high-1) DO
+      --place all elements less than pivot to the left
+      --keeping track of partition index
+      IF arr[j] < pivot THEN
+        i = i + 1
+        swap = arr[i]
+        arr[i] = arr[j]
+        arr[j] = swap
+      ENDIF
+    ENDFOR
+    --put pivot into partition index
+    swap = arr[i+1]
+    arr[i+1] = arr[high]
+    arr[high] = swap
+
+    RETURN(i+1)
+
+  END partition_r
+
+ROUTINE partition_i
+  VAR
+    i,j : INTEGER
+    pivot : INTEGER
+    swap : INTEGER
+  BEGIN
+    pivot = arr[high]
+
+    i = low - 1
+    FOR j = low TO (high-1) DO
+      --place all elements less than pivot to the left
+      --keeping track of partition index
+      IF arr[j] < pivot THEN
+        i = i + 1
+        swap = arr[i]
+        arr[i] = arr[j]
+        arr[j] = swap
+      ENDIF
+    ENDFOR
+    --put pivot into partition index
+    swap = arr[i+1]
+    arr[i+1] = arr[high]
+    arr[high] = swap
+
+    RETURN(i+1)
+
+  END partition_i
+
+ROUTINE quicksort_r
+  VAR
+    part_i : INTEGER
+  BEGIN
+    IF (low < high) THEN
+      part_i = partition_r(arr, low, high)
+
+      quicksort_r(arr, low, part_i - 1) --before part
+      quicksort_r(arr, part_i + 1, high) --after part
+    ENDIF
+  END quicksort_r
+
+ROUTINE quicksort_i
+  VAR
+    part_i : INTEGER
+  BEGIN
+    IF (low < high) THEN
+      part_i = partition_i(arr, low, high)
+
+      quicksort_i(arr, low, part_i - 1) --before part
+      quicksort_i(arr, part_i + 1, high) --after part
+    ENDIF
+  END quicksort_i
+
+ROUTINE math__quicksort_real
+  BEGIN
+    quicksort_r(arr, 1, ARRAY_LEN(arr))
+  END math__quicksort_real
+
+ROUTINE math__quicksort_int
+  BEGIN
+    quicksort_i(arr, 1, ARRAY_LEN(arr))
+  END math__quicksort_int
+
 ROUTINE math__map_real
   BEGIN
     RETURN((x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min)
