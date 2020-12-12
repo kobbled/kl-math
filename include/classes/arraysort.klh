@@ -1,0 +1,20 @@
+--header
+%include header_guard.m
+--oop
+%include namespace.m
+--path type declare
+%include define_type.m
+
+--start header file
+header_if -- ifndef class
+header_def -- define class
+
+--public
+--the comparator will sort is acending order: comparator = FALSE : <
+--                        or decending order: comparator = TRUE : > 
+declare_member(class_name,partition,class_name,prt)
+ROUTINE partition(list : ARRAY[*] OF ARRAYTYPE; low, high : INTEGER; comparator : BOOLEAN) : INTEGER FROM class_name
+declare_member(class_name,quicksort,class_name,qsrt)
+ROUTINE quicksort(list : ARRAY[*] OF ARRAYTYPE; low, high : INTEGER; comparator : BOOLEAN) FROM class_name
+
+%endif --end header

@@ -1,0 +1,108 @@
+PROGRAM test_pth_srt
+%NOLOCKGROUP
+
+%include systemvars.klt
+
+--path sorting template
+%include testpath.klt
+
+--array sorting template
+%define class_name tstarr
+%include testarr.klt
+
+%ifdef array_type_define
+array_type_define
+%endif
+
+VAR
+    frm : XYZWPR
+    list : call_path_type(LISTHEADER,LISTTYPE)
+    arr : ARRAY[10] OF ARRAYTYPE
+    b : ARRAY[2] OF BOOLEAN
+
+
+%include systemlib.klh
+
+%class tstsort('pathsort.klc','pathsort.klh','testpath.klt')
+
+%class tstarr('arraysort.klc','arraysort.klh','testarr.klt')
+
+ROUTINE clear_path(p : call_path_type(LISTHEADER,LISTTYPE) )
+  VAR
+    i, status : INTEGER
+  BEGIN
+    i = PATH_LEN(p)
+    WHILE PATH_LEN(p) > 0 DO
+      DELETE_NODE(p,i,status)
+        i = i - 1
+	  ENDWHILE
+  END clear_path
+
+ROUTINE clear_arr (a : ARRAY[*] OF ARRAYTYPE)
+  VAR
+    i : INTEGER
+    uninita : ARRAYTYPE
+  BEGIN
+    FOR i=1 TO ARRAY_LEN(a) DO
+      a[i] = uninita
+    ENDFOR
+  END clear_arr
+
+ROUTINE append_nodes(p : call_path_type(LISTHEADER,LISTTYPE); nodes : INTEGER)
+  VAR
+    i, status : INTEGER
+  BEGIN
+    FOR i=1 TO nodes DO
+      APPEND_NODE(p,status)
+    ENDFOR
+  END append_nodes
+
+ROUTINE t_arr_sort : BOOLEAN
+  BEGIN
+    clear_arr(arr)
+    
+    arr[1].coords = VEC(0,1,0) ; arr[1].priority = 4 ;
+    arr[2].coords = VEC(1,0,0) ; arr[2].priority = 2 ;
+    arr[3].coords = VEC(0,0,1) ; arr[3].priority = 6 ;
+    arr[4].coords = VEC(0,0,0) ; arr[4].priority = 1 ;
+    arr[5].coords = VEC(-1,0,0) ; arr[5].priority = 3 ; 
+    arr[6].coords = VEC(0,0,-1) ; arr[6].priority = 7 ;
+    arr[7].coords = VEC(0,-1,0) ; arr[7].priority = 5 ;
+
+    tstarr__quicksort(arr, 1, 7, FALSE)
+
+    RETURN(TRUE)
+
+  END t_arr_sort
+
+ROUTINE t_path_sort : BOOLEAN
+  BEGIN
+    --add nodes
+    clear_path(list)
+    append_nodes(list, 10)
+
+    frm = ZEROPOS(1)
+    frm.p = -45 ; frm.r = 45
+
+    list[1].node_pos = frm:POS(0,0,0,0,0,0, (ZEROPOS(1).Config_data))   -- line length 0mm
+    list[10].node_pos = frm:POS(100,0,0,0,0,0, (ZEROPOS(1).Config_data)) -- line length 100mm
+    list[8].node_pos = frm:POS(300,0,0,0,0,0, (ZEROPOS(1).Config_data)) -- line length 300mm
+    list[2].node_pos = frm:POS(500,0,0,0,0,0, (ZEROPOS(1).Config_data)) -- line length 500mm
+    list[4].node_pos = frm:POS(580,0,0,0,0,0, (ZEROPOS(1).Config_data)) -- line length 580mm
+    list[6].node_pos = frm:POS(650,0,0,0,0,0, (ZEROPOS(1).Config_data)) -- line length 650mm
+    list[3].node_pos = frm:POS(700,0,0,0,0,0, (ZEROPOS(1).Config_data)) -- line length 700mm
+    list[9].node_pos = frm:POS(760,0,0,0,0,0, (ZEROPOS(1).Config_data)) -- line length 760mm
+    list[5].node_pos = frm:POS(850,0,0,0,0,0, (ZEROPOS(1).Config_data)) -- line length 850mm
+    list[7].node_pos = frm:POS(1000,0,0,0,0,0, (ZEROPOS(1).Config_data)) -- line length 1000mm
+    
+    tstsort__quicksort(list, 1, PATH_LEN(list), FALSE)
+
+    RETURN(TRUE)
+
+  END t_path_sort
+
+BEGIN
+  b[1] = t_path_sort
+  b[2] = t_arr_sort
+  
+END test_pth_srt

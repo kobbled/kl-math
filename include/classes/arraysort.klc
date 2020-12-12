@@ -1,0 +1,78 @@
+PROGRAM class_name
+%NOLOCKGROUP
+%COMMENT = 'sort path structs'
+
+%include namespace.m
+
+-- declare type
+%include define_type.m
+
+--print user defined struct
+%ifdef array_type_define
+array_type_define
+%endif
+
+%include math.klh
+%include arraysort.klh
+
+
+%ifdef define_callback
+define_callback
+%else
+%error 'define_callback: callback function must be defined in template file for comparing nodes.'
+%endif
+
+--comparator = TRUE : >, comparator = FALSE : <
+ROUTINE glt(type1, type2 : ARRAYTYPE; comparator : BOOLEAN) : BOOLEAN
+  BEGIN
+    --run user defined callback
+    --for evaluating the two nodes
+    IF comparator THEN
+      RETURN(callback(type1) > callback(type2))
+    ELSE
+      RETURN(callback(type1) < callback(type2))
+    ENDIF
+  END glt
+
+ROUTINE partition
+  VAR
+    i,j : INTEGER
+    pivot, swap : ARRAYTYPE
+    status : INTEGER
+  BEGIN
+    pivot = list[high]
+
+    i = low - 1
+    FOR j = low TO (high-1) DO
+      --place all elements less than pivot to the left
+      --keeping track of partition index
+      IF glt(list[j], list[high], FALSE) THEN
+        i = i + 1
+        swap = list[i]
+        list[i] = list[j]
+        list[j] = swap
+      ENDIF
+    ENDFOR
+    --put pivot into partition index
+    swap = list[i+1]
+    list[i+1] = list[high]
+    list[high] = swap
+
+    RETURN(i+1)
+
+  END partition
+
+ROUTINE quicksort
+  VAR
+    part_i : INTEGER
+  BEGIN
+    IF (low < high) THEN
+      part_i = partition(list, low, high, comparator)
+
+      quicksort(list, low, part_i - 1, comparator) --before part
+      quicksort(list, part_i + 1, high, comparator) --after part
+    ENDIF
+  END quicksort
+
+BEGIN
+END class_name

@@ -1,0 +1,15 @@
+%include define_type.m
+
+%define LISTHEADER 
+%defeval LISTTYPE STD_PTH_NODE
+
+%mode push
+%mode string QQQ "`" "`" "\\"
+%define define_callback `declare_member(class_name,callback,class_name,call)
+ROUTINE callback(nde : LISTTYPE) : REAL
+  BEGIN
+    --get euclidean distance
+    RETURN( math__norm(nde.node_pos.location) )
+  END callback
+  `
+%mode pop 

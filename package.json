@@ -9,11 +9,13 @@
     "src/math.kl"
   ],
   "includes" : [
-    "include"
+    "include",
+    "include/classes",
+    "test/test_types"
   ],
   "tests" : [
     "test/test_math.kl",
-    "test/test_ls_math.ls"
+    "test/test_pth_srt.kl"
   ],
   "depends" : [
     "KUnit",
@@ -23,6 +25,7 @@
     "TPElib",
     "registers",
     "pose",
+    "systemlib",
     "ktransw-macros"
   ],
   "tp-interfaces" : [

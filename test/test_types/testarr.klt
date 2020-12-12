@@ -1,0 +1,21 @@
+%include define_type.m
+
+%defeval ARRAYTYPE t_TST_ARR
+
+%mode push
+%mode string QQQ "`" "`" "\\"
+
+%define array_type_define `TYPE
+  t_TST_ARR FROM class_name = STRUCTURE
+    coords : VECTOR
+    priority : INTEGER
+  ENDSTRUCTURE`
+
+%define define_callback `declare_member(class_name,callback,class_name,call)
+ROUTINE callback(nde : ARRAYTYPE) : REAL
+  BEGIN
+    --get euclidean distance
+    RETURN( nde.priority )
+  END callback
+  `
+%mode pop 
