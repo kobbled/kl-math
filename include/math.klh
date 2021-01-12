@@ -73,7 +73,8 @@ declare_function(prog_name,proj_length,prog_name_alias,prjlen)
 ROUTINE math__proj_length(v : VECTOR ; ax : VECTOR) : REAL FROM math
 declare_function(prog_name,average_vector,prog_name_alias,avevec)
 ROUTINE math__average_vector(arrv : ARRAY[*] OF VECTOR) : VECTOR FROM math
-
+declare_function(prog_name,manhattan_dist,prog_name_alias,mandst)
+ROUTINE math__manhattan_dist(start_v : VECTOR; end_v : VECTOR) : REAL FROM math
 
 -- matrix convolutions
 declare_function(prog_name,translate,prog_name_alias,trans)

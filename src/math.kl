@@ -485,7 +485,11 @@ ROUTINE math__average_vector
 
     RETURN(ave)
   END math__average_vector
-  
+
+ROUTINE manhattan_dist
+  BEGIN
+    RETURN(ABS(end_v.x - start_v.x) + ABS(end_v.y - start_v.y) + ABS(end_v.z - start_v.z))
+  END manhattan_dist
 
 -- matrix convolutions
 ROUTINE math__translate
