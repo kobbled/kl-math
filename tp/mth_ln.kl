@@ -1,4 +1,4 @@
-PROGRAM mth_exp
+PROGRAM mth_ln
 %NOBUSYLAMP
 %NOLOCKGROUP
 
@@ -7,10 +7,10 @@ VAR
 	val : REAL
 %from tpe.klh %import get_int_arg,get_real_arg
 %from registers.klh %import set_real
-%from math.builtins.klh %import exp
+%from math.builtins.klh %import ln
 
 BEGIN
 	val = tpe__get_real_arg(1)
 	out_reg = tpe__get_int_arg(2)
-	registers__set_real(out_reg, math__exp(val))
-END mth_exp
+	registers__set_real(out_reg, math__ln(val))
+END mth_ln

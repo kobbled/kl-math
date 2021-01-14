@@ -52,6 +52,10 @@ ROUTINE math__atan_pos
     RETURN(ATAN2(pose.x, pose.y))
   END math__atan_pos
 
+ROUTINE math__ln
+  BEGIN
+    RETURN(LN(val))
+  END math__ln
 
 --opts
 ROUTINE math__pow
@@ -486,10 +490,10 @@ ROUTINE math__average_vector
     RETURN(ave)
   END math__average_vector
 
-ROUTINE manhattan_dist
+ROUTINE math__manhattan_dist
   BEGIN
     RETURN(ABS(end_v.x - start_v.x) + ABS(end_v.y - start_v.y) + ABS(end_v.z - start_v.z))
-  END manhattan_dist
+  END math__manhattan_dist
 
 -- matrix convolutions
 ROUTINE math__translate
