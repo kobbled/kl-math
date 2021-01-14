@@ -22,6 +22,7 @@ VAR
 
 
 %include systemlib.klh
+%include kunit.klh
 
 %class tstsort('pathsort.klc','pathsort.klh','testpath.klt')
 
@@ -57,7 +58,12 @@ ROUTINE append_nodes(p : call_path_type(LISTHEADER,LISTTYPE); nodes : INTEGER)
     ENDFOR
   END append_nodes
 
-ROUTINE t_arr_sort : BOOLEAN
+ROUTINE t_arr_quick : BOOLEAN
+  VAR
+%define max_i 7
+    i : INTEGER
+    act_arr : ARRAY[max_i] OF INTEGER
+    exp_arr : ARRAY[max_i] OF INTEGER
   BEGIN
     clear_arr(arr)
     
@@ -69,13 +75,55 @@ ROUTINE t_arr_sort : BOOLEAN
     arr[6].coords = VEC(0,0,-1) ; arr[6].priority = 7 ;
     arr[7].coords = VEC(0,-1,0) ; arr[7].priority = 5 ;
 
-    tstarr__quicksort(arr, 1, 7, FALSE)
+    tstarr__quicksort(arr, 1, max_i, FALSE)
 
-    RETURN(TRUE)
+    FOR i=1 TO max_i DO
+      act_arr[i] = arr[i].priority
+    ENDFOR
 
-  END t_arr_sort
+    exp_arr[1] = 1 ; exp_arr[2] = 2 ; exp_arr[3] = 3 ; exp_arr[4] = 4 ;
+    exp_arr[5] = 5 ; exp_arr[6] = 6 ; exp_arr[7] = 7 ;
 
-ROUTINE t_path_sort : BOOLEAN
+    RETURN(kunit_eq_ari(exp_arr, act_arr) )
+
+  END t_arr_quick
+
+ROUTINE t_arr_bubb : BOOLEAN
+  VAR
+%define max_i 7
+    i : INTEGER
+    act_arr : ARRAY[max_i] OF INTEGER
+    exp_arr : ARRAY[max_i] OF INTEGER
+  BEGIN
+    clear_arr(arr)
+    
+    arr[1].coords = VEC(0,1,0) ; arr[1].priority = 4 ;
+    arr[2].coords = VEC(1,0,0) ; arr[2].priority = 2 ;
+    arr[3].coords = VEC(0,0,1) ; arr[3].priority = 6 ;
+    arr[4].coords = VEC(0,0,0) ; arr[4].priority = 1 ;
+    arr[5].coords = VEC(-1,0,0) ; arr[5].priority = 3 ; 
+    arr[6].coords = VEC(0,0,-1) ; arr[6].priority = 7 ;
+    arr[7].coords = VEC(0,-1,0) ; arr[7].priority = 5 ;
+
+    tstarr__bubblesort(arr, 1, max_i, TRUE)
+
+    FOR i=1 TO max_i DO
+      act_arr[i] = arr[i].priority
+    ENDFOR
+
+    exp_arr[1] = 1 ; exp_arr[2] = 2 ; exp_arr[3] = 3 ; exp_arr[4] = 4 ;
+    exp_arr[5] = 5 ; exp_arr[6] = 6 ; exp_arr[7] = 7 ;
+
+    RETURN(kunit_eq_ari(exp_arr, act_arr) )
+
+  END t_arr_bubb
+
+ROUTINE t_path_quick : BOOLEAN
+  VAR
+%define max_i 7
+    i : INTEGER
+    act_arr : ARRAY[max_i] OF XYZWPR
+    exp_arr : ARRAY[max_i] OF XYZWPR
   BEGIN
     --add nodes
     clear_path(list)
@@ -97,12 +145,26 @@ ROUTINE t_path_sort : BOOLEAN
     
     tstsort__quicksort(list, 1, PATH_LEN(list), FALSE)
 
-    RETURN(TRUE)
+    FOR i=1 TO max_i DO
+      act_arr[i] = list[i].node_pos
+    ENDFOR
 
-  END t_path_sort
+    exp_arr[1] = frm:POS(0,0,0,0,0,0, (ZEROPOS(1).Config_data))
+    exp_arr[2] = frm:POS(100,0,0,0,0,0, (ZEROPOS(1).Config_data))
+    exp_arr[3] = frm:POS(300,0,0,0,0,0, (ZEROPOS(1).Config_data))
+    exp_arr[4] = frm:POS(500,0,0,0,0,0, (ZEROPOS(1).Config_data))
+    exp_arr[5] = frm:POS(580,0,0,0,0,0, (ZEROPOS(1).Config_data))
+    exp_arr[6] = frm:POS(650,0,0,0,0,0, (ZEROPOS(1).Config_data))
+    exp_arr[7] = frm:POS(700,0,0,0,0,0, (ZEROPOS(1).Config_data))
+
+    RETURN(kunit_eq_pos(exp_arr[1], act_arr[1]) AND kunit_eq_pos(exp_arr[2], act_arr[2]) AND kunit_eq_pos(exp_arr[3], act_arr[3]) AND &
+           kunit_eq_pos(exp_arr[4], act_arr[4]) AND kunit_eq_pos(exp_arr[5], act_arr[5]) AND kunit_eq_pos(exp_arr[6], act_arr[6]) AND &
+           kunit_eq_pos(exp_arr[7], act_arr[7]) )
+  END t_path_quick
 
 BEGIN
-  b[1] = t_path_sort
-  b[2] = t_arr_sort
-  
+  kunit_test('test array quicksort', t_arr_quick)
+  kunit_test('test array bubblesort', t_arr_bubb)
+  kunit_test('test path quicksort', t_path_quick)
+  kunit_done
 END test_pth_srt

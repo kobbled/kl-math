@@ -46,7 +46,7 @@ ROUTINE partition
     FOR j = low TO (high-1) DO
       --place all elements less than pivot to the left
       --keeping track of partition index
-      IF glt(list[j], list[high], FALSE) THEN
+      IF glt(list[j], list[high], comparator) THEN
         i = i + 1
         swap = list[i]
         list[i] = list[j]
@@ -73,6 +73,25 @@ ROUTINE quicksort
       quicksort(list, part_i + 1, high, comparator) --after part
     ENDIF
   END quicksort
+
+ROUTINE bubblesort
+  VAR
+    i,j : INTEGER
+    n : INTEGER
+    swap : LISTTYPE
+  BEGIN
+    n = high
+    FOR i=low TO high DO
+      FOR j=low TO n-1 DO
+        IF glt(list[j], list[j+1], comparator) THEN
+          swap = (list[j+1])
+          list[j+1] = (list[j])
+          list[j] = swap
+        ENDIF
+      ENDFOR
+      n = n - 1
+    ENDFOR
+  END bubblesort
 
 BEGIN
 END class_name

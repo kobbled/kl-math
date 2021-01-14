@@ -16,5 +16,6 @@ declare_member(class_name,partition,class_name,prt)
 ROUTINE partition(list : call_path_type(LISTHEADER,LISTTYPE); low, high : INTEGER; comparator : BOOLEAN) : INTEGER FROM class_name
 declare_member(class_name,quicksort,class_name,qsrt)
 ROUTINE quicksort(list : call_path_type(LISTHEADER,LISTTYPE); low, high : INTEGER; comparator : BOOLEAN) FROM class_name
-
+declare_member(class_name,bubblesort,class_name,bsrt)
+ROUTINE bubblesort(list : call_path_type(LISTHEADER,LISTTYPE); low, high : INTEGER; comparator : BOOLEAN) FROM class_name
 %endif --end header
