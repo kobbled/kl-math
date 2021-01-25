@@ -7,6 +7,8 @@ PROGRAM class_name
 -- declare type
 %include define_type.m
 
+%include systemlib.klt
+
 --print user defined struct
 %ifdef list_type_define
 list_type_define
@@ -37,10 +39,8 @@ ROUTINE glt(type1, type2 : LISTTYPE; comparator : BOOLEAN) : BOOLEAN
 ROUTINE partition
   VAR
     i,j : INTEGER
-    pivot, swap : LISTTYPE
-    status : INTEGER
+    swap : LISTTYPE
   BEGIN
-    pivot = list[high]
 
     i = low - 1
     FOR j = low TO (high-1) DO
