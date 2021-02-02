@@ -85,6 +85,12 @@ declare_function(prog_name,roty,prog_name_alias,roty)
 ROUTINE math__roty(pos : XYZWPR ; angle : REAL) : XYZWPR FROM math
 declare_function(prog_name,rotz,prog_name_alias,rotz)
 ROUTINE math__rotz(pos : XYZWPR ; angle : REAL) : XYZWPR FROM math
+declare_function(prog_name,rotx_vec,prog_name_alias,rtxv)
+ROUTINE math__rotx_vec(pos : VECTOR ; angle : REAL) : VECTOR FROM math
+declare_function(prog_name,roty_vec,prog_name_alias,rtyv)
+ROUTINE math__roty_vec(pos : VECTOR ; angle : REAL) : VECTOR FROM math
+declare_function(prog_name,rotz_vec,prog_name_alias,rtzv)
+ROUTINE math__rotz_vec(pos : VECTOR ; angle : REAL) : VECTOR FROM math
 -- algorithms
 
 %endif --math_h

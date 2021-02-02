@@ -540,5 +540,38 @@ ROUTINE math__rotz
     RETURN(pos:mat_rot)
   END math__rotz
 
+ROUTINE math__rotx_vec
+  VAR
+    mat_rot : XYZWPR
+  BEGIN
+    --initialize
+    mat_rot.x = 0; mat_rot.y = 0 ; mat_rot.z = 0;
+    mat_rot.w = angle; mat_rot.p = 0 ; mat_rot.r = 0;
+    --multiply
+    RETURN(mat_rot:pos)
+  END math__rotx_vec
+
+ROUTINE math__roty_vec
+  VAR
+    mat_rot : XYZWPR
+  BEGIN
+    --initialize
+    mat_rot.x = 0; mat_rot.y = 0 ; mat_rot.z = 0;
+    mat_rot.w = 0; mat_rot.p = angle ; mat_rot.r = 0;
+    --multiply
+    RETURN(mat_rot:pos)
+  END math__roty_vec
+
+ROUTINE math__rotz_vec
+  VAR
+    mat_rot : XYZWPR
+  BEGIN
+    --initialize
+    mat_rot.x = 0; mat_rot.y = 0 ; mat_rot.z = 0;
+    mat_rot.w = 0; mat_rot.p = 0 ; mat_rot.r = angle;
+    --multiply
+    RETURN(mat_rot:pos)
+  END math__rotz_vec
+
 BEGIN
 END math
