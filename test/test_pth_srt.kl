@@ -118,6 +118,36 @@ ROUTINE t_arr_bubb : BOOLEAN
 
   END t_arr_bubb
 
+ROUTINE t_arr_bubb2 : BOOLEAN
+  VAR
+%define max_i 7
+    i : INTEGER
+    act_arr : ARRAY[max_i] OF INTEGER
+    exp_arr : ARRAY[max_i] OF INTEGER
+  BEGIN
+    clear_arr(arr)
+    
+    arr[1].coords = VEC(0,1,0) ; arr[1].priority = 4 ;
+    arr[2].coords = VEC(1,0,0) ; arr[2].priority = 2 ;
+    arr[3].coords = VEC(0,0,1) ; arr[3].priority = 6 ;
+    arr[4].coords = VEC(0,0,0) ; arr[4].priority = 1 ;
+    arr[5].coords = VEC(-1,0,0) ; arr[5].priority = 3 ; 
+    arr[6].coords = VEC(0,0,-1) ; arr[6].priority = 7 ;
+    arr[7].coords = VEC(0,-1,0) ; arr[7].priority = 5 ;
+
+    tstarr__bubblesort(arr, 1, max_i, FALSE)
+
+    FOR i=1 TO max_i DO
+      act_arr[i] = arr[i].priority
+    ENDFOR
+
+    exp_arr[1] = 7 ; exp_arr[2] = 6 ; exp_arr[3] = 5 ; exp_arr[4] = 4 ;
+    exp_arr[5] = 3 ; exp_arr[6] = 2 ; exp_arr[7] = 1 ;
+
+    RETURN(kunit_eq_ari(exp_arr, act_arr) )
+
+  END t_arr_bubb2
+
 ROUTINE t_path_quick : BOOLEAN
   VAR
 %define max_i 7
@@ -166,5 +196,6 @@ BEGIN
   kunit_test('test array quicksort', t_arr_quick)
   kunit_test('test array bubblesort', t_arr_bubb)
   kunit_test('test path quicksort', t_path_quick)
+  kunit_test('test array bubblesort high to low', t_arr_bubb2)
   kunit_done
 END test_pth_srt
