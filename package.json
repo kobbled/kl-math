@@ -18,15 +18,14 @@
     "test/test_pth_srt.kl"
   ],
   "depends" : [
-    "KUnit",
     "Strings",
     "errors",
-    "display",
-    "TPElib",
-    "registers",
-    "pose",
     "systemlib",
     "ktransw-macros"
+  ],
+  "tests-depends" : [
+    "display",
+    "KUnit"
   ],
   "tp-interfaces" : [
     {"routine" : "math__abs", "program_name" : "mth_abs"},
@@ -38,5 +37,10 @@
     {"routine" : "math__cos", "program_name" : "mth_cos"},
     {"routine" : "math__atan2", "program_name" : "mth_atan2"},
     {"routine" : "math__atan_pos", "program_name" : "mth_atan_pos"}
+  ],
+  "interface-depends" : [
+    "TPElib",
+    "pose",
+    "registers"
   ]
 }
