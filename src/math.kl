@@ -139,6 +139,16 @@ ROUTINE math_decimal
       
       RETURN(rNum) 
   END math_decimal
+
+ROUTINE math__arclength
+  BEGIN
+    RETURN(radius*degrees*M_PI/180)
+  END math__arclength
+
+ROUTINE math__arcangle
+  BEGIN
+    RETURN(length/radius*180/M_PI)
+  END math__arcangle
   
 --array math
 ROUTINE math__max_int
@@ -494,6 +504,11 @@ ROUTINE math__manhattan_dist
   BEGIN
     RETURN(ABS(end_v.x - start_v.x) + ABS(end_v.y - start_v.y) + ABS(end_v.z - start_v.z))
   END math__manhattan_dist
+
+-- ROUTINE math__octile_distance(start_v : VECTOR; end_v : VECTOR) : REAL FROM math
+--   BEGIN
+--     RETURN(M_SQRT2*math_min2(ABS(end_v.x-start_v.x), ABS(end_v.y-start_v.y)) + ABS(ABS(end_v.x-start_v.x)-ABS(end_v.y-start_v.y))) )
+--   END math__octile_distance
 
 -- matrix convolutions
 ROUTINE math__translate
