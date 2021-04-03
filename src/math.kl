@@ -150,6 +150,11 @@ ROUTINE math__arcangle
     RETURN(length/radius*180/M_PI)
   END math__arcangle
   
+ROUTINE math__bitmask
+  BEGIN
+    RETURN( TRUNC(EXP((decimal-1) * LN(2))) )
+  END math__bitmask
+
 --array math
 ROUTINE math__max_int
   VAR

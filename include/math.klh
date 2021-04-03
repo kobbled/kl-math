@@ -29,6 +29,8 @@ declare_function(prog_name,arclength,prog_name_alias,arclng)
 ROUTINE math__arclength(degrees : REAL; radius : REAL) : REAL FROM math
 declare_function(prog_name,arcangle,prog_name_alias,arcang)
 ROUTINE math__arcangle(length : REAL; radius : REAL) : REAL FROM math
+declare_function(prog_name,bitmask,prog_name_alias,bitmsk)
+ROUTINE math__bitmask(decimal : INTEGER) : INTEGER FROM math
 --random numbers
 declare_function(prog_name,srand,prog_name_alias,srand)
 ROUTINE math__srand(seed : INTEGER) FROM math
