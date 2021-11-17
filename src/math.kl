@@ -155,6 +155,16 @@ ROUTINE math__bitmask
     RETURN( TRUNC(EXP((decimal-1) * LN(2))) )
   END math__bitmask
 
+ROUTINE math__cosh
+  BEGIN
+    RETURN(0.5*(EXP(x) + EXP(-x)))
+  END math__cosh
+
+ROUTINE math__sinh
+  BEGIN
+    RETURN(0.5*(EXP(x) - EXP(-x)))
+  END math__sinh
+
 --array math
 ROUTINE math__max_int
   VAR
