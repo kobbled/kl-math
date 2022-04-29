@@ -30,7 +30,7 @@ ROUTINE math__arclength(degrees : REAL; radius : REAL) : REAL FROM math
 declare_function(prog_name,arcangle,prog_name_alias,arcang)
 ROUTINE math__arcangle(length : REAL; radius : REAL) : REAL FROM math
 declare_function(prog_name,bitmask,prog_name_alias,bitmsk)
-ROUTINE math__bitmask(decimal : INTEGER) : INTEGER FROM math
+ROUTINE math__bitmask(num : INTEGER) : INTEGER FROM math
 declare_function(prog_name,cosh,prog_name_alias,cosh)
 ROUTINE math__cosh(x : REAL) : REAL FROM math
 declare_function(prog_name,sinh,prog_name_alias,sinh)
@@ -55,12 +55,20 @@ ROUTINE math__rand_rarr(seed : INTEGER; out_arr : ARRAY[*] OF REAL) FROM math
 --array math
 declare_function(prog_name,max_int,prog_name_alias,maxint)
 ROUTINE math__max_int(numbers : ARRAY[*] OF INTEGER) : INTEGER FROM math
+declare_function(prog_name,max_int_index,prog_name_alias,maxiidx)
+ROUTINE math__max_int_index(numbers : ARRAY[*] OF INTEGER) : INTEGER FROM math
 declare_function(prog_name,max_real,prog_name_alias,maxreal)
 ROUTINE math__max_real(numbers : ARRAY[*] OF REAL) : REAL FROM math
+declare_function(prog_name,max_real_index,prog_name_alias,maxridx)
+ROUTINE math__max_real_index(numbers : ARRAY[*] OF REAL) : INTEGER FROM math
 declare_function(prog_name,min_int,prog_name_alias,minint)
 ROUTINE math__min_int(numbers : ARRAY[*] OF INTEGER) : INTEGER FROM math
+declare_function(prog_name,min_int_index,prog_name_alias,miniidx)
+ROUTINE math__min_int_index(numbers : ARRAY[*] OF INTEGER) : INTEGER FROM math
 declare_function(prog_name,min_real,prog_name_alias,minreal)
 ROUTINE math__min_real(numbers : ARRAY[*] OF REAL) : REAL FROM math
+declare_function(prog_name,min_real_index,prog_name_alias,minridx)
+ROUTINE math__min_real_index(numbers : ARRAY[*] OF REAL) : INTEGER FROM math
 declare_function(prog_name,sum_real,prog_name_alias,sumreal)
 ROUTINE math__sum_real(numbers : ARRAY[*] OF REAL) : REAL FROM math
 declare_function(prog_name,average_real,prog_name_alias,avereal)

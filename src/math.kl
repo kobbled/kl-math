@@ -152,7 +152,7 @@ ROUTINE math__arcangle
   
 ROUTINE math__bitmask
   BEGIN
-    RETURN( TRUNC(EXP((decimal-1) * LN(2))) )
+    RETURN( TRUNC(EXP((num-1) * LN(2))) )
   END math__bitmask
 
 ROUTINE math__cosh
@@ -181,6 +181,23 @@ ROUTINE math__max_int
     RETURN(max)
   END math__max_int
 
+ROUTINE math__max_int_index
+  VAR
+    max : INTEGER
+    i,idx   : INTEGER
+  BEGIN
+    max = numbers[1]
+    idx = 1
+    FOR i=1 TO ARRAY_LEN(numbers) DO
+      IF numbers[i] > max THEN
+        max = numbers[i]
+        idx = i
+      ENDIF
+    ENDFOR
+
+    RETURN(idx)
+  END math__max_int_index
+
 ROUTINE math__max_real
   VAR
     max : REAL
@@ -195,6 +212,23 @@ ROUTINE math__max_real
 
     RETURN(max)
   END math__max_real
+
+ROUTINE math__max_real_index
+  VAR
+    max : REAL
+    i,idx   : INTEGER
+  BEGIN
+    max = numbers[1]
+    idx = 1
+    FOR i=1 TO ARRAY_LEN(numbers) DO
+      IF numbers[i] > max THEN
+        max = numbers[i]
+        idx = i
+      ENDIF
+    ENDFOR
+
+    RETURN(idx)
+  END math__max_real_index
 
 ROUTINE math__min_int
   VAR
@@ -211,6 +245,23 @@ ROUTINE math__min_int
     RETURN(min)
   END math__min_int
 
+ROUTINE math__min_int_index
+  VAR
+    min : INTEGER
+    i,idx   : INTEGER
+  BEGIN
+    min = numbers[1]
+    idx = 1
+    FOR i=1 TO ARRAY_LEN(numbers) DO
+      IF numbers[i] < min THEN
+        min = numbers[i]
+        idx = i
+      ENDIF
+    ENDFOR
+
+    RETURN(idx)
+  END math__min_int_index
+
 ROUTINE math__min_real
   VAR
     min : REAL
@@ -225,6 +276,23 @@ ROUTINE math__min_real
 
     RETURN(min)
   END math__min_real
+
+ROUTINE math__min_real_index
+  VAR
+    min : REAL
+    i,idx   : INTEGER
+  BEGIN
+    min = numbers[1]
+    idx = 1
+    FOR i=1 TO ARRAY_LEN(numbers) DO
+      IF numbers[i] < min THEN
+        min = numbers[i]
+        idx = i
+      ENDIF
+    ENDFOR
+
+    RETURN(idx)
+  END math__min_real_index
 
 ROUTINE math__sum_real
   VAR
