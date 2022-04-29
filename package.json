@@ -41,7 +41,10 @@
     {"routine" : "math__arcangle", "program_name" : "mth_arcang"},
     {"routine" : "math__rotx", "program_name" : "mth_rotx"},
     {"routine" : "math__roty", "program_name" : "mth_roty"},
-    {"routine" : "math__rotz", "program_name" : "mth_rotz"}
+    {"routine" : "math__rotz", "program_name" : "mth_rotz"},
+    {"routine" : "math__ceil", "program_name" : "mth_ceil"},
+    {"routine" : "math__floor", "program_name" : "mth_floor"},
+    {"routine" : "math__decimal", "program_name" : "mth_dec"}
   ],
   "interface-depends" : [
     "TPElib",
