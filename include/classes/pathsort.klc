@@ -137,5 +137,76 @@ ROUTINE remove_duplicates
 
   END remove_duplicates
 
+
+ROUTINE keep_unique
+  VAR
+    i,j : INTEGER
+    b : BOOLEAN
+    blank : LISTTYPE
+    status : INTEGER
+  BEGIN
+    --return if 0 or 1 elements
+    IF (high-low) < 2 THEN
+      RETURN(high)
+    ENDIF
+
+    -- initialize flag if at end of array in loop
+    b = FALSE
+
+    -- if two elements are different copy the first.
+    -- if two elements are the same skip the copy
+    j = 1
+    i=low
+    WHILE i < high DO
+      IF eq(list[i], list[i+1]) THEN
+        REPEAT
+          i = i + 1
+          IF i = high THEN
+            b = TRUE
+          ELSE
+            b = (NOT eq(list[i], list[i+1]))
+          ENDIF
+        UNTIL(b)
+      ELSE
+        --add to list in unequal
+        list[j] = list[i]
+        j = j + 1
+      ENDIF
+
+      i = i + 1
+    ENDWHILE
+
+    -- make sure to add the last element if not a duplicate
+    IF (NOT eq(list[high-1], list[high])) THEN
+      list[j] = list[high]
+    ELSE
+      j = j - 1
+    ENDIF
+
+    --if all elements are duplicates. Do not remove anything
+    -- ..warning:: A hack for the draw module so that a clipped
+    --             line with duplicate start and end points
+    --             does not get deleted. Still delete duplicates.
+    IF j = 0 THEN
+      IF (high-low > 4) THEN
+        RETURN(keep_unique(list, low+1, high-1))
+      ELSE
+        --RETURN(high)
+        RETURN(remove_duplicates(list, low, high))
+      ENDIF
+    ENDIF 
+
+    --uninitialize left over elements
+    IF j < high THEN
+      FOR i=j+1 TO high DO
+        DELETE_NODE(list,i,status)
+      ENDFOR
+    ENDIF 
+
+    RETURN(j)
+
+  END keep_unique
+
+
 BEGIN
 END class_name

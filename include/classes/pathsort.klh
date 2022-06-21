@@ -20,4 +20,6 @@ declare_member(class_name,bubblesort,class_name,bsrt)
 ROUTINE bubblesort(list : call_path_type(LISTHEADER,LISTTYPE); low, high : INTEGER; comparator : BOOLEAN) FROM class_name
 declare_member(class_name,remove_duplicates,class_name,rdup)
 ROUTINE remove_duplicates(list : call_path_type(LISTHEADER,LISTTYPE); low, high : INTEGER) : INTEGER FROM class_name
+declare_member(class_name,keep_unique,class_name,kunq)
+ROUTINE keep_unique(list : call_path_type(LISTHEADER,LISTTYPE); low, high : INTEGER) : INTEGER FROM class_name
 %endif --end header
