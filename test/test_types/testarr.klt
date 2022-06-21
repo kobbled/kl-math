@@ -1,6 +1,7 @@
 %include define_type.m
 
 %defeval ARRAYTYPE t_TST_ARR
+%defeval ARRAYEPSILON 1
 
 %mode push
 %mode string QQQ "`" "`" "\\"

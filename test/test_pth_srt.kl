@@ -148,6 +148,37 @@ ROUTINE t_arr_bubb2 : BOOLEAN
 
   END t_arr_bubb2
 
+ROUTINE t_arr_dup : BOOLEAN
+  VAR
+%define max_i 9
+    act_arr : ARRAY[5] OF INTEGER
+    exp_arr : ARRAY[5] OF INTEGER
+    i, n : INTEGER
+  BEGIN
+    clear_arr(arr)
+
+    arr[1].coords = VEC(0,0,0) ; arr[1].priority = 1 ;
+    arr[2].coords = VEC(0,0,0) ; arr[2].priority = 2 ;
+    arr[3].coords = VEC(0,0,0) ; arr[3].priority = 2 ;
+    arr[4].coords = VEC(0,0,0) ; arr[4].priority = 3 ;
+    arr[5].coords = VEC(0,0,0) ; arr[5].priority = 4 ; 
+    arr[6].coords = VEC(0,0,0) ; arr[6].priority = 4 ;
+    arr[7].coords = VEC(0,0,0) ; arr[7].priority = 4 ;
+    arr[8].coords = VEC(0,0,0) ; arr[8].priority = 5 ;
+    arr[9].coords = VEC(0,0,0) ; arr[9].priority = 5 ;
+
+    n = tstarr__remove_duplicates(arr, 1, max_i)
+
+    FOR i=1 TO n DO
+      act_arr[i] = arr[i].priority
+    ENDFOR
+
+    exp_arr[1] = 1 ; exp_arr[2] = 2 ; exp_arr[3] = 3 ; exp_arr[4] = 4 ; exp_arr[5] = 5 ;
+
+    RETURN(kunit_eq_ari(exp_arr, act_arr) )
+
+  END t_arr_dup
+
 ROUTINE t_path_quick : BOOLEAN
   VAR
 %define max_i 7
@@ -195,6 +226,7 @@ ROUTINE t_path_quick : BOOLEAN
 BEGIN
   kunit_test('test array quicksort', t_arr_quick)
   kunit_test('test array bubblesort', t_arr_bubb)
+  kunit_test('test array duplicates', t_arr_dup)
   kunit_test('test path quicksort', t_path_quick)
   kunit_test('test array bubblesort high to low', t_arr_bubb2)
   kunit_done

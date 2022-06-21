@@ -36,6 +36,15 @@ ROUTINE glt(type1, type2 : LISTTYPE; comparator : BOOLEAN) : BOOLEAN
     ENDIF
   END glt
 
+ROUTINE eq(type1, type2 : LISTTYPE) : BOOLEAN
+  BEGIN
+    IF (ABS(callback(type2)-callback(type1)) < LISTEPSILON) THEN
+      RETURN(TRUE)
+    ENDIF
+
+    RETURN(FALSE)
+  END eq
+
 ROUTINE partition
   VAR
     i,j : INTEGER
@@ -92,6 +101,41 @@ ROUTINE bubblesort
       n = n - 1
     ENDFOR
   END bubblesort
+
+ROUTINE remove_duplicates
+  VAR
+    i,j : INTEGER
+    blank : LISTTYPE
+    status : INTEGER
+  BEGIN
+    --return if 0 or 1 elements
+    IF (high-low) < 2 THEN
+      RETURN(high)
+    ENDIF
+
+    -- if two elements are different copy the first.
+    -- if two elements are the same skip the copy
+    j = 1
+    FOR i=low TO high - 1 DO
+      IF (NOT eq(list[i], list[i+1])) THEN
+        list[j] = list[i]
+        j = j + 1
+      ENDIF
+    ENDFOR
+
+    -- make sure to add the last element
+    list[j] = list[high]
+
+    --uninitialize left over elements
+    IF j < high THEN
+      FOR i=j+1 TO high DO
+        DELETE_NODE(list,i,status)
+      ENDFOR
+    ENDIF 
+
+    RETURN(j)
+
+  END remove_duplicates
 
 BEGIN
 END class_name

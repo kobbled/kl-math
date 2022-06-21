@@ -2,6 +2,7 @@
 
 %define LISTHEADER 
 %defeval LISTTYPE STD_PTH_NODE
+%defeval LISTEPSILON 1
 
 %mode push
 %mode string QQQ "`" "`" "\\"

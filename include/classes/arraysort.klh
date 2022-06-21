@@ -18,4 +18,6 @@ declare_member(class_name,quicksort,class_name,qsrt)
 ROUTINE quicksort(list : ARRAY[*] OF ARRAYTYPE; low, high : INTEGER; comparator : BOOLEAN) FROM class_name
 declare_member(class_name,bubblesort,class_name,bsrt)
 ROUTINE bubblesort(list : ARRAY[*] OF ARRAYTYPE; low, high : INTEGER; comparator : BOOLEAN) FROM class_name
+declare_member(class_name,remove_duplicates,class_name,rdup)
+ROUTINE remove_duplicates(list : ARRAY[*] OF ARRAYTYPE; low, high : INTEGER) : INTEGER FROM class_name
 %endif --end header
