@@ -104,7 +104,7 @@ ROUTINE math__round
     ENDIF
   END math__round
 
-ROUTINE math_decimal
+ROUTINE math__decimal
   VAR
     s : STRING[16]
     rNum : REAL
@@ -138,7 +138,7 @@ ROUTINE math_decimal
       ENDIF
       
       RETURN(rNum) 
-  END math_decimal
+  END math__decimal
 
 ROUTINE math__arclength
   BEGIN
