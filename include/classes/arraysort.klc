@@ -7,7 +7,7 @@ PROGRAM class_name
 -- declare type
 %include define_type.m
 
-%include systemlib.klt
+%include systemlib.types.klt
 
 --print user defined struct
 %ifdef array_type_define
