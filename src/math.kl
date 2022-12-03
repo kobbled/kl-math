@@ -42,6 +42,11 @@ ROUTINE math__cos
     RETURN(COS(angle))
   END math__cos
 
+ROUTINE math__tan
+  BEGIN
+    RETURN(TAN(angle))
+  END math__tan
+
 ROUTINE math__atan2
   BEGIN
     RETURN(ATAN2(ajacent, opposite))

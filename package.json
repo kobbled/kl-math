@@ -35,6 +35,7 @@
     {"routine" : "math__pow", "program_name" : "mth_pow"},
     {"routine" : "math__sin", "program_name" : "mth_sin"},
     {"routine" : "math__cos", "program_name" : "mth_cos"},
+    {"routine" : "math__tan", "program_name" : "mth_tan"},
     {"routine" : "math__atan2", "program_name" : "mth_atan2"},
     {"routine" : "math__atan_pos", "program_name" : "mth_atan_pos"},
     {"routine" : "math__arclength", "program_name" : "mth_arclen"},
