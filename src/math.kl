@@ -16,6 +16,8 @@ PROGRAM math
 %include errors.klh
 %from strings.klh %import lstrip
 
+%define EPSILON 0.0001
+
 --built ins
 ROUTINE math__abs
   BEGIN
@@ -29,6 +31,10 @@ ROUTINE math__exp
 
 ROUTINE math__sqrt
   BEGIN
+    IF ABS(val) < EPSILON THEN
+      RETURN(0)
+    ENDIF
+
     RETURN(SQRT(val))
   END math__sqrt
 
@@ -49,11 +55,17 @@ ROUTINE math__tan
 
 ROUTINE math__atan2
   BEGIN
+    IF ABS(ajacent) < EPSILON AND ABS(opposite) < EPSILON THEN
+      RETURN(0)
+    ENDIF
     RETURN(ATAN2(ajacent, opposite))
   END math__atan2
 
 ROUTINE math__atan_pos
   BEGIN
+    IF ABS(pose.x) < EPSILON AND ABS(pose.y) < EPSILON THEN
+      RETURN(0)
+    ENDIF
     RETURN(ATAN2(pose.x, pose.y))
   END math__atan_pos
 
