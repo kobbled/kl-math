@@ -55,7 +55,7 @@ ROUTINE math__tan
 
 ROUTINE math__atan2
   BEGIN
-    IF ABS(ajacent) < EPSILON AND ABS(opposite) < EPSILON THEN
+    IF (ABS(ajacent) < EPSILON) AND (ABS(opposite) < EPSILON) THEN
       RETURN(0)
     ENDIF
     RETURN(ATAN2(ajacent, opposite))
@@ -63,7 +63,7 @@ ROUTINE math__atan2
 
 ROUTINE math__atan_pos
   BEGIN
-    IF ABS(pose.x) < EPSILON AND ABS(pose.y) < EPSILON THEN
+    IF (ABS(pose.x) < EPSILON) AND (ABS(pose.y) < EPSILON) THEN
       RETURN(0)
     ENDIF
     RETURN(ATAN2(pose.x, pose.y))
