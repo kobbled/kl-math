@@ -69,6 +69,20 @@ ROUTINE math__atan_pos
     RETURN(ATAN2(pose.x, pose.y))
   END math__atan_pos
 
+ROUTINE math__map_to_360
+  -- map angle to 360 degrees
+  BEGIN
+    IF (angle < 0) THEN
+      RETURN(angle + 360)
+    ELSE
+      IF (angle > 360) THEN
+        RETURN(angle - 360)
+      ELSE
+        RETURN(angle)
+      ENDIF
+    ENDIF
+  END math__map_to_360
+
 ROUTINE math__ln
   BEGIN
     RETURN(LN(val))
