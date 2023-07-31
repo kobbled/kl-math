@@ -35,6 +35,9 @@ declare_function(prog_name,cosh,prog_name_alias,cosh)
 ROUTINE math__cosh(x : REAL) : REAL FROM math
 declare_function(prog_name,sinh,prog_name_alias,sinh)
 ROUTINE math__sinh(x : REAL) : REAL FROM math
+declare_function(prog_name,map_to_360,prog_name_alias,map360)
+ROUTINE math__map_to_360(angle : REAL) : REAL FROM math
+
 --random numbers
 declare_function(prog_name,srand,prog_name_alias,srand)
 ROUTINE math__srand(seed : INTEGER) FROM math
